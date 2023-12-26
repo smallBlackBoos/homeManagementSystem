@@ -12,7 +12,7 @@
     <li>家政人员放在 worker 中</li>
     <li>管理员放在 admin 中</li>
   </ol>
-  <li>在代码中修改的样式路径</li>
+  <li>在代码中修改样式路径</li>
   <li>点击nginx.exe，输入，如：localhost:90/consumer/index.html，正常则提交gitHub</li>
 </ol>
 <h1>后端 - homeManagementSystem</h1>
