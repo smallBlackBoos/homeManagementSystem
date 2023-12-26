@@ -7,8 +7,8 @@
 }
 
 .Current dl {
-    padding: 0 0 0 38px;current_icon.gif
-    background: url(../img/current_icon.gif) no-repeat 17px center;
+    padding: 0 0 0 38px;
+    /* background: url(../img/current_icon.gif) no-repeat 17px center; */
 }
 
 .Current dl a {
@@ -46,7 +46,7 @@
     position: relative;
     border-top: 4px solid #ff6b23;
     height: 123px;
-    background: url(../images/jzfw_menu.jpg) no-repeat center top;
+    /* background: url(../images/jzfw_menu.jpg) no-repeat center top; */
 }
 
 .MenuBox .Menu1 li {
@@ -87,7 +87,7 @@
     left: 67px;
     width: 52px;
     height: 52px;
-    background: url(../images/Menu_li_on.png) no-repeat;
+    /* background: url(../images/Menu_li_on.png) no-repeat; */
 }
 
 .MenuBox .RCon {
@@ -149,7 +149,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    background: url(../images/jzfw_icon9.jpg) repeat-x left top;
+    /* background: url(../images/jzfw_icon9.jpg) repeat-x left top; */
 }
 
 .MenuBox .Menu2 li span {

@@ -8,7 +8,7 @@
         <id column="id" property="id"/>
         <result column="worker_id" property="workerId"/>
         <result column="username" property="username" />
-        <result column="name" property="workerName" />
+        <result column="worker_name" property="workerName" />
         <result column="good_name" property="goodsName" />
         <result column="kinds_name" property="kindsName" />
         <result column="price" property="goodsPrice" />
@@ -21,7 +21,7 @@
         select
             o.id,
             c.username,
-            w.name,
+            w.name as worker_name,
             w.id as worker_id,
             g.good_name,
             g.price,

@@ -9,31 +9,31 @@
 
 
 		<!-- all css -->
-		<link rel="stylesheet" href="../static/css/zui.min.css">
-		<link rel="stylesheet" href="../static/css/bootstrap.min.css">
-		<link rel="stylesheet" href="../static/css/magnific-popup.css">
-		<link rel="stylesheet" href="../static/css/owl.carousel.min.css">
-		<link rel="stylesheet" href="../static/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../static/css/flaticon.css">
-		<link rel="stylesheet" href="../static/css/ionicons.min.css">
-		<link rel="stylesheet" href="../static/css/headline.css">
-		<link rel="stylesheet" href="../static/css/animate.min.css">
-		<link rel="stylesheet" href="../static/css/material-design-iconic-font.min.css">
-		<link rel="stylesheet" href="../static/css/meanmenu.css">
-		<link rel="stylesheet" href="../static/css/Pe-icon-7-stroke.css">
-		<link rel="stylesheet" href="../static/css/bundle.css">
-		<link rel="stylesheet" href="../static/css/style.css">
-		<link rel="stylesheet" href="../static/css/responsive.css">
-		<link rel="stylesheet" href="../static/css/layui.css">
-		<link rel="stylesheet" href="../static/css/element-ui.css" />
+		<link rel="stylesheet" href="../static/consumer/css/zui.min.css">
+		<link rel="stylesheet" href="../static/consumer/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../static/consumer/css/magnific-popup.css">
+		<link rel="stylesheet" href="../static/consumer/css/owl.carousel.min.css">
+		<link rel="stylesheet" href="../static/consumer/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../static/consumer/css/flaticon.css">
+		<link rel="stylesheet" href="../static/consumer/css/ionicons.min.css">
+		<link rel="stylesheet" href="../static/consumer/css/headline.css">
+		<link rel="stylesheet" href="../static/consumer/css/animate.min.css">
+		<link rel="stylesheet" href="../static/consumer/css/material-design-iconic-font.min.css">
+		<link rel="stylesheet" href="../static/consumer/css/meanmenu.css">
+		<link rel="stylesheet" href="../static/consumer/css/Pe-icon-7-stroke.css">
+		<link rel="stylesheet" href="../static/consumer/css/bundle.css">
+		<link rel="stylesheet" href="../static/consumer/css/style.css">
+		<link rel="stylesheet" href="../static/consumer/css/responsive.css">
+		<link rel="stylesheet" href="../static/consumer/css/layui.css">
+		<link rel="stylesheet" href="../static/consumer/css/element-ui.css" />
 
-		<script src="../static/js/vendor/modernizr-2.8.3.min.js"></script>
-		<script src="../static/js/jquery.js"></script>
-		<script src="../static/js/zui.min.js"></script>
-		<script src="../static/js/layui.js"></script>
-		<script src="../static/js/vue.js"></script>
-		<script src="../static/js/axios.js"></script>
-		<script src="../static/js/element-ui.js"></script>
+		<script src="../static/consumer/js/vendor/modernizr-2.8.3.min.js"></script>
+		<script src="../static/consumer/js/jquery.js"></script>
+		<script src="../static/consumer/js/zui.min.js"></script>
+		<script src="../static/consumer/js/layui.js"></script>
+		<script src="../static/consumer/js/vue.js"></script>
+		<script src="../static/consumer/js/axios.js"></script>
+		<script src="../static/consumer/js/element-ui.js"></script>
 
 		<script>
 			// 获取本地的token令牌
@@ -55,7 +55,7 @@
 					<div class="row">
 						<div class="col-lg-3 col-md-3 col-sm-3 site-branding col-xs-12">
 							<div class="header-logo">
-								<a href="index.html"><img src="../static/img/logo/1.png" alt="" /></a>
+								<a href="index.html"><img src="../static/consumer/img/logo/1.png" alt="" /></a>
 							</div>
 						</div>
 						<div class="col-lg-5 col-md-6 col-sm-9 hidden-xs">
@@ -131,7 +131,8 @@
 												<ul class="order-list">
 													<li class="order-item col-sm-6 ">
 														<span class="tit">雇员姓名：</span>
-														<span class="cont">{{ row.workerName }}</span>
+														<span
+															class="cont">{{ row.workerName == null ? '待分配' : row.workerName }}</span>
 													</li>
 													<li class="order-item col-sm-6 ">
 														<span class="tit">服务类型：</span>
@@ -151,10 +152,10 @@
 													</li>
 													<li class="order-item col-sm-6 ">
 														<span class="tit">订单状态：</span>
-														<span class="cont">{{ row.status == 1 ? '已完成' : '待支付' }}</span>
+														<span class="cont">{{ row.status }}</span>
 													</li>
 													<li class="order-item col-sm-6 clear-bottom-border"
-														v-if="!row.status">
+														v-if="row.status == '待支付'">
 														<span class="tit">订单操作：</span>
 														<span class="cont">
 															<el-button type="danger"
@@ -166,12 +167,11 @@
 
 											<template>
 												<div class="block" style="margin-left: 150px;">
-													<el-pagination @size-change="handleSizeChange"
-														background
+													<el-pagination @size-change="handleSizeChange" background
 														@current-change="handleCurrentChange"
-														:current-page="currentPage" 
-														:page-size="2"
-														layout="total, prev, pager, next, jumper" :total="orderInfo.total">
+														:current-page="currentPage" :page-size="2"
+														layout="total, prev, pager, next, jumper"
+														:total="orderInfo.total">
 													</el-pagination>
 												</div>
 											</template>
@@ -189,7 +189,7 @@
 					<el-form-item label="服务名">
 						<el-input placeholder="请输入内容" v-model="order.goodsName" :disabled="true"></el-input>
 					</el-form-item>
-					
+
 					<el-form-item label="价格">
 						<el-input placeholder="请输入内容" v-model="order.goodsPrice" :disabled="true"></el-input>
 					</el-form-item>
@@ -281,11 +281,12 @@
 							id: 0,
 							name: '',
 							workerId: 0,
+							workerName: null,
 							kindsId: 0,
 							kindsName: '',
 							goodsPrice: 0,
 							goodsName: '',
-							status: 0,
+							status: "待支付",
 							createTime: '',
 						}],
 						total: 0,
@@ -295,6 +296,7 @@
 						id: 0,
 						name: '',
 						workerId: 0,
+						workerName: null,
 						kindsId: 0,
 						kindsName: '',
 						goodsPrice: 0,
@@ -340,11 +342,8 @@
 						// 准备要传递的数据
 						let myParams = new URLSearchParams();
 						myParams.append('password', password);
-						myParams.append("workerId", this.order.workerId);
 						myParams.append("orderId", this.order.id);
 						myParams.append("payment", this.order.goodsPrice);
-
-						console.log(vm.order);
 
 						// 发送数据
 						axios
@@ -364,6 +363,24 @@
 									vm.form.password = '';
 									vm.form.confirmPassword = '';
 
+
+									(vm.orderInfo.rows).forEach((item, index) => {
+										// 修改时间格式
+										item.createTime = (item.createTime).replace("T", " ");
+										// 修改订单状态
+										switch (item.status) {
+											case 0:
+												item.status = "待支付"
+												break;
+											case 1:
+												item.status = "已支付，等待服务人员上门"
+												break;
+											case 2:
+												item.status = "已完成"
+												break;
+										}
+									});
+
 									layer.msg("支付成功");
 								}
 
@@ -377,7 +394,7 @@
 					},
 					handleCurrentChange(val) {
 						console.log(`当前页: ${val}`);
-						
+
 						this.getInfo(val);
 					},
 					getInfo(val) {
@@ -388,7 +405,7 @@
 									'token': data
 								},
 							}).then(function(response) {
-						
+
 								if (response.data.code == 0) { // 获取失败
 									if (response.data.msg == 'NOT_LOGIN') { // 登录信息过期
 										layer.msg("登录信息过期，请重新登录", {
@@ -396,21 +413,35 @@
 										}, function(res) {
 											location.href = './login.html'; // 跳转到登录页面
 										});
-						
+
 										return;
 									}
-						
+
 									layer.msg(response.data.msg);
 									return;
 								}
-						
+
 								vm.orderInfo = response.data.data; // 更新数据
-						
+
 								// 修改时间格式
 								(vm.orderInfo.rows).forEach((item, index) => {
-									item.createTime = (item.createTime).replace("T", " ")
+									item.createTime = (item.createTime).replace("T", " ");
+									// 修改订单状态
+									switch (item.status) {
+										case 0:
+											item.status = "待支付"
+											break;
+										case 1:
+											item.status = "已支付，等待服务人员上门"
+											break;
+										case 2:
+											item.status = "已完成"
+											break;
+									}
 								});
-						
+								
+								console.log(vm.orderInfo);
+
 							}).catch(function(error) {
 								console.log(error); // 提示用户失败信息
 							});
@@ -446,39 +477,54 @@
 							console.log(error); // 提示用户失败信息
 						});
 
-					// 获取订单信息
-					axios
-						.get("http://127.0.0.1:8080/consumerUser/getConsumerUserOrder", {
-							headers: {
-								'token': data
-							},
-						}).then(function(response) {
+					this.getInfo(1);
+					// // 获取订单信息
+					// axios
+					// 	.get("http://127.0.0.1:8080/consumerUser/getConsumerUserOrder", {
+					// 		headers: {
+					// 			'token': data
+					// 		},
+					// 	}).then(function(response) {
 
-							if (response.data.code == 0) { // 获取失败
-								if (response.data.msg == 'NOT_LOGIN') { // 登录信息过期
-									layer.msg("登录信息过期，请重新登录", {
-										time: 1200
-									}, function(res) {
-										location.href = './login.html'; // 跳转到登录页面
-									});
+					// 		if (response.data.code == 0) { // 获取失败
+					// 			if (response.data.msg == 'NOT_LOGIN') { // 登录信息过期
+					// 				layer.msg("登录信息过期，请重新登录", {
+					// 					time: 1200
+					// 				}, function(res) {
+					// 					location.href = './login.html'; // 跳转到登录页面
+					// 				});
 
-									return;
-								}
+					// 				return;
+					// 			}
 
-								layer.msg(response.data.msg);
-								return;
-							}
+					// 			layer.msg(response.data.msg);
+					// 			return;
+					// 		}
 
-							vm.orderInfo = response.data.data; // 更新数据
+					// 		vm.orderInfo = response.data.data; // 更新数据
 
-							// 修改时间格式
-							(vm.orderInfo.rows).forEach((item, index) => {
-								item.createTime = (item.createTime).replace("T", " ")
-							});
+					// 		(vm.orderInfo.rows).forEach((item, index) => {
+					// 			// 修改时间格式
+					// 			item.createTime = (item.createTime).replace("T", " ");
+					// 			// 修改订单状态
+					// 			switch (item.status) {
+					// 				case 0:
+					// 					item.status = "待支付"
+					// 					break;
+					// 				case 1:
+					// 					item.status = "已支付，等待服务人员上门"
+					// 					break;
+					// 				case 2:
+					// 					item.status = "已完成"
+					// 					break;
+					// 			}
+					// 		});
+							
+					// 		// console.log(vm.orderInfo);
 
-						}).catch(function(error) {
-							console.log(error); // 提示用户失败信息
-						});
+					// 	}).catch(function(error) {
+					// 		console.log(error); // 提示用户失败信息
+					// 	});
 
 				}
 			})

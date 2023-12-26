@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -58,11 +59,6 @@ public class ConsumerUserServiceImpl implements ConsumerUserService {
         PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
 
         return pageBean;
-    }
-
-    @Override
-    public List<Kinds> getKindsMain() {
-        return kindsMapper.selectKindsSix();
     }
 
     @Override
@@ -149,7 +145,7 @@ public class ConsumerUserServiceImpl implements ConsumerUserService {
 
     @Override
     @Transactional
-    public Result pay(Integer id, String password, Integer workerId, Integer orderId, Double payment) {
+    public Result pay(Integer id, String password, Integer orderId, Double payment) {
 
         BigDecimal bg = new BigDecimal(payment);
         // 直接舍去多余的小数位
@@ -169,12 +165,53 @@ public class ConsumerUserServiceImpl implements ConsumerUserService {
         // 更新消费者账户余额
         consumerUserMapper.updateMoney(id, -money);
         // 更新家政人员账户余额
-        workerMapper.updateMoney(workerId, money);
-        // 更新订单状态为（1 已完成）
+        // workerMapper.updateMoney(workerId, money);
+        // 更新订单状态为（1 已支付，等待服务人员上门）
         orderMapper.updateStatus(orderId, 1);
 
         return Result.success();
     }
+
+    @Override
+    public void buy(Integer id, Integer goodsId) {
+        Order order = new Order();
+        order.setUserId(id);
+        order.setGoodsId(goodsId);
+        order.setStatus((short) 0); // 默认订单待支付
+        order.setCreateTime(LocalDateTime.now());
+
+        // 添加订单表
+         orderMapper.insert(order);
+    }
+
+    @Transactional
+    @Override
+    public void atLeisureWorker(Integer orderId) {
+        // 获取所有空闲的家政人员的id
+        List<Integer> workerIdList = workerMapper.getWorkerByStatus();
+
+        // 从空闲的家政人员id列表中随机取得一个id值
+        int index = (int) (Math.random() * workerIdList.size());
+        Integer workerId = workerIdList.get(index);
+
+        // 更新订单的家政人员id  -->  给订单分配一个家政人员
+        orderMapper.updateWorkerId(orderId, workerId);
+
+        // 修改该家政人员的状态为1，工作中
+        workerMapper.updateStatus(workerId, 1);
+    }
+
+    /*
+    @Override
+    public Integer getWorkerByStatus() {
+        // 获取所有空闲的家政人员id列表
+        List<Integer> workerIdList = workerMapper.getWorkerByStatus();
+        // 从列表中随机获取一个id
+        Integer workerId = (int) (Math.random() * workerIdList.size());
+
+        return workerId;
+    }
+     */
 
 //
 //    @Override

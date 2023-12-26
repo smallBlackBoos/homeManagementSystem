@@ -29,17 +29,6 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public PageBean getAllGoods(Integer page, Integer pageSize) {
-        PageHelper.startPage(page, pageSize);
-
-        List<Goods> goods = goodsMapper.getAllGoods();
-        Page<Goods> p = (Page<Goods>) goods;
-
-        PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
-        return pageBean;
-    }
-
-    @Override
     public void removeGoods(List<Integer> ids) {
         goodsMapper.deleteGoods(ids);
     }

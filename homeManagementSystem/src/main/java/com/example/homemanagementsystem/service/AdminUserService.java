@@ -1,6 +1,7 @@
 package com.example.homemanagementsystem.service;
 
 import com.example.homemanagementsystem.pojo.AdminUser;
+import com.example.homemanagementsystem.pojo.Goods;
 import com.example.homemanagementsystem.pojo.PageBean;
 
 public interface AdminUserService {
@@ -10,6 +11,4 @@ public interface AdminUserService {
      * @return 管理员对象
      */
     AdminUser login(AdminUser adminUser);
-
-
 }

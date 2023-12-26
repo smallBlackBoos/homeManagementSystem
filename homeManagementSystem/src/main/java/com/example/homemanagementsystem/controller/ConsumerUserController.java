@@ -1,7 +1,6 @@
 package com.example.homemanagementsystem.controller;
 
 import com.example.homemanagementsystem.pojo.ConsumerUser;
-import com.example.homemanagementsystem.pojo.Kinds;
 import com.example.homemanagementsystem.pojo.PageBean;
 import com.example.homemanagementsystem.pojo.Result;
 import com.example.homemanagementsystem.service.ConsumerUserService;
@@ -14,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 
 @RestController
+@RequestMapping("/consumerUser")
 public class ConsumerUserController {
 
     @Autowired
@@ -26,14 +25,21 @@ public class ConsumerUserController {
     private QiniuKodoUtils qiniuKodoUtils;
 
     /**
-     * 主页面查看种类信息
+     * 订购服务
+     * @param token 令牌
+     * @param goodsId 商品id
      * @return Result
      */
-    @GetMapping("/getKindsMain")
-    public Result getKindsMain() {
-        List<Kinds> kindsList =  consumerUserService.getKindsMain();
+    @PostMapping("/consumerBuy")
+    public Result consumerBuy(@RequestHeader String token, Integer goodsId) {
+        // 解析token，获取用户id
+        Claims claims = JwtUtils.parseJWT(token);
+        Integer id = (Integer) claims.get("id");
 
-        return Result.success(kindsList);
+        // 添加订单
+        consumerUserService.buy(id, goodsId);
+
+        return Result.success();
     }
 
     /**
@@ -41,7 +47,7 @@ public class ConsumerUserController {
      * @param token token令牌
      * @return 结果
      */
-    @GetMapping("/consumerUser/getUserInfo")
+    @GetMapping("/getUserInfo")
     public Result getUserInfo(@RequestHeader String token) {
 
         // 解析token，获取用户id
@@ -60,7 +66,7 @@ public class ConsumerUserController {
      * @param token 令牌
      * @return Result
      */
-    @GetMapping("consumerUser/getConsumerUserOrder")
+    @GetMapping("/getConsumerUserOrder")
     public Result getConsumerUserOrder(@RequestParam(defaultValue = "1") Integer page,
                                        @RequestParam(defaultValue = "2") Integer pageSize,
                                        @RequestHeader String token) {
@@ -75,26 +81,12 @@ public class ConsumerUserController {
     }
 
     /**
-     * 分页查询所有用户信息
-     * @param page 页数
-     * @param pageSize 分页大小
-     * @return Result
-     */
-    @GetMapping("/adminUser/getAllConsumerUser")
-    public Result getAllConsumerUser(@RequestParam(defaultValue = "1") Integer page,
-                             @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageBean pageBean = consumerUserService.getAllConsumerUser(page, pageSize);
-
-        return Result.success(pageBean);
-    }
-
-    /**
      * 修改个人信息
      * @param token token令牌
      * @param consumerUser 用户对象
      * @return Result
      */
-    @PutMapping("/consumerUser/editUserInfo")
+    @PutMapping("/editUserInfo")
     public Result editUserInfo(@RequestHeader String token, @RequestBody ConsumerUser consumerUser) {
         // 解析token，获取用户id
         Claims claims = JwtUtils.parseJWT(token);
@@ -114,7 +106,7 @@ public class ConsumerUserController {
      * @param newPassword 新密码
      * @return Result
      */
-    @PutMapping("/consumerUser/editPassword")
+    @PutMapping("/editPassword")
     public Result editPassword(@RequestHeader String token, String oldPassword, String newPassword) {
         // 解析token，获取用户id
         Claims claims = JwtUtils.parseJWT(token);
@@ -130,7 +122,7 @@ public class ConsumerUserController {
      * @param topUpMoney 充值的金额
      * @return Result
      */
-    @PutMapping("/consumerUser/topUp")
+    @PutMapping("/topUp")
     public Result topUp(@RequestHeader String token, @RequestParam String password, @RequestParam String topUpMoney) {
         // 解析token，获取用户id
         Claims claims = JwtUtils.parseJWT(token);
@@ -148,13 +140,12 @@ public class ConsumerUserController {
      * 支付
      * @param token 令牌
      * @param password 密码
-     * @param workerId 家政人员id
      * @param orderId 订单id
      * @param payment 支付金额
-     * @return
+     * @return Result
      */
-    @PostMapping("/consumerUser/pay")
-    public Result pay(@RequestHeader String token, String password, Integer workerId, Integer orderId, String payment) {
+    @PostMapping("/pay")
+    public Result pay(@RequestHeader String token, String password, Integer orderId, String payment) {
         // 解析token，获取用户id
         Claims claims = JwtUtils.parseJWT(token);
         Integer id = (Integer) claims.get("id");
@@ -164,13 +155,15 @@ public class ConsumerUserController {
         }
 
         // String --> Double
-        Double money = Double.valueOf(payment);
+        double money = Double.parseDouble(payment);
         if (money < 0) {
             return Result.error("支付金额不能为0");
         }
 
         // 付钱
-        Result result = consumerUserService.pay(id, password, workerId, orderId, money);
+        Result result = consumerUserService.pay(id, password, orderId, money);
+        // 给该订单分配一个空闲的家政人员
+        consumerUserService.atLeisureWorker(orderId);
 
         if (result.getCode() == 0) {
             return result;
@@ -186,10 +179,9 @@ public class ConsumerUserController {
      * @param token 令牌
      * @param image 图片
      * @return 结果
-     * @throws IOException
      */
     @Transactional
-    @PostMapping("/consumerUser/upload")
+    @PostMapping("/upload")
     public Result upload(@RequestHeader String token, MultipartFile image) throws IOException {
         // 解析 token。
         Claims claims = JwtUtils.parseJWT(token);  // jwt 包含当前包含的员工信息

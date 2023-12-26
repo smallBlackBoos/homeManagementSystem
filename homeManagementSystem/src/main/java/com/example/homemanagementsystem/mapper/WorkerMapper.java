@@ -13,9 +13,8 @@ public interface WorkerMapper {
      * 查看所有空闲的家政人员
      * @return 家政人员列表
      */
-    @Select("select id, username, name, password, sex, age, address, phone, email, brief_introduction, status, image " +
-            "from worker where status = 0")
-    List<Worker> getWorkerByStatus();
+    @Select("select id from worker where status = 0")
+    List<Integer> getWorkerByStatus();
 
     /**
      * 通过用户名和密码查询用户
@@ -80,6 +79,10 @@ public interface WorkerMapper {
      */
     void deleteById(List<Integer> ids);
 
-
-
+    /**
+     * 通过id修改用户的状态
+     * @param workerId
+     */
+    @Update("update worker set status = #{status} where id = #{workerId}")
+    void updateStatus(Integer workerId, Integer status);
 }

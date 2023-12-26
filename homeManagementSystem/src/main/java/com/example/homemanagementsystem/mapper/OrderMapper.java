@@ -1,10 +1,7 @@
 package com.example.homemanagementsystem.mapper;
 
 import com.example.homemanagementsystem.pojo.Order;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -38,4 +35,20 @@ public interface OrderMapper {
      */
     @Update("update `order` set status = #{status} where id = #{orderId}")
     void updateStatus(Integer orderId, Integer status);
+
+    /**
+     * 插入一个订单
+     * @param order 订单
+     */
+    @Insert("insert into `order` (user_id, goods_id, status, create_time) values (#{userId}, #{goodsId}, " +
+            "#{status}, #{createTime})")
+    void insert(Order order);
+
+    /**
+     * 通过订单Id修改订单的家政人员id
+     * @param orderId 订单id
+     * @param workerId 家政人员id
+     */
+    @Update("update `order` set worker_id = #{workerId} where id = #{orderId}")
+    void updateWorkerId(Integer orderId, Integer workerId);
 }

@@ -44,12 +44,6 @@ public interface ConsumerUserService {
     PageBean getConsumerUserOrder(Integer userId, int page, Integer pageSize);
 
     /**
-     * 主页面查看种类信息
-     * @return List<Kinds>
-     */
-    List<Kinds> getKindsMain();
-
-    /**
      * 修改个人信息
      * @param consumerUser 用户对象
      * @return ConsumerUser
@@ -86,16 +80,28 @@ public interface ConsumerUserService {
      * 支付
      * @param id 用户id
      * @param password 密码
-     * @param workerId 家政人员id
      * @param orderId 订单id
      * @param payment 支付金额
      * @return Result
      */
-    Result pay(Integer id, String password, Integer workerId, Integer orderId, Double payment);
+    Result pay(Integer id, String password, Integer orderId, Double payment);
 
     /**
-     * 查看所有空闲的家政人员
-     * @return 家政人员列表
+     * 订购商品
+     * @param id 用户id
+     * @param goodsId 商品id
      */
-    // List<Worker> browseLeisureWorker();
+    void buy(Integer id, Integer goodsId);
+
+    /**
+     * 获取所有空闲家政人员的id
+     * @return Integer
+     */
+    // Integer getWorkerByStatus();
+
+    /**
+     * 给订单分配空闲的家政人员
+     * @param orderId 订单Id
+     */
+    void atLeisureWorker(Integer orderId);
 }
