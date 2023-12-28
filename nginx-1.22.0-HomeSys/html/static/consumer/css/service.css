@@ -1,0 +1,1489 @@
+.Current {
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    background: #FFFFFF;
+    margin: 40px 0 11px;
+}
+
+.Current dl {
+    padding: 0 0 0 38px;
+    /* background: url(../img/current_icon.gif) no-repeat 17px center; */
+}
+
+.Current dl a {
+    color: #555555;
+    font-size: 19px;
+    padding: 0 10px 0 0;
+}
+
+.Current dl span {
+    color: #555555;
+    font-size: 16px;
+    padding: 0 10px;
+}
+
+.jzfwContain {
+    background: #f0f0f0;
+    overflow: hidden;
+}
+
+.MainContent {
+    width: 1200px;
+    height: 3000px;
+}
+
+.Content {
+    width: 950px;
+}
+
+.MenuBox {
+    width: 950px;
+    position: relative;
+}
+
+.MenuBox .Menu1 {
+    position: relative;
+    border-top: 4px solid #ff6b23;
+    height: 123px;
+    /* background: url(../images/jzfw_menu.jpg) no-repeat center top; */
+}
+
+.MenuBox .Menu1 li {
+    list-style: none;
+    float: left;
+    width: 190px;
+    text-align: center;
+}
+
+.MenuBox .Menu1 span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff6b23;
+    display: block;
+    padding: 36px 0 5px;
+}
+
+.MenuBox .Menu1 em {
+    display: block;
+    font-style: normal;
+    color: #777777;
+    font-size: 16px;
+    font-family: "Helvetica";
+    text-transform: uppercase;
+}
+
+.MenuBox .Menu1 li i {
+    display: none;
+}
+
+.MenuBox .Menu1 li.on i {
+    display: block;
+}
+
+.MenuBox .Menu1 .select {
+    position: absolute;
+    top: 99px;
+    left: 67px;
+    width: 52px;
+    height: 52px;
+    /* background: url(../images/Menu_li_on.png) no-repeat; */
+}
+
+.MenuBox .RCon {
+    width: 240px;
+    position: absolute;
+    right: -250px;
+    top: 0;
+}
+
+.MenuBox .RCon .WeChat {
+    text-align: center;
+    background: #FFFFFF;
+    padding: 0 4px;
+}
+
+.MenuBox .RCon .WeChat span {
+    display: block;
+    padding: 33px 0 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.MenuBox .RCon .WeChat img {
+    width: 149px;
+    height: 239px;
+}
+
+.MenuBox .RCon .Hotline {
+    padding: 60px 0 80px;
+    text-align: center;
+    background: #FFFFFF;
+}
+
+.MenuBox .RCon .Hotline img {
+    width: 177px;
+    height: 192px;
+}
+
+.MenuBox.on {
+    position: fixed;
+    top: 0;
+    z-index: 99;
+}
+
+.MenuBox .Menu2 {
+    margin: 0 0 29px;
+    background-color: #F0F0F0;
+}
+
+.MenuBox .Menu2 li {
+    text-align: center;
+    list-style: none;
+    float: left;
+    margin-right: 26px;
+    width: 218px;
+    height: 138px;
+}
+
+.MenuBox .Menu2 li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    /* background: url(../images/jzfw_icon9.jpg) repeat-x left top; */
+}
+
+.MenuBox .Menu2 li span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff6b23;
+    display: block;
+    padding: 36px 0 5px;
+}
+
+.MenuBox .Menu2 li em {
+    display: block;
+    font-style: normal;
+    color: #777777;
+    font-size: 16px;
+    font-family: "Helvetica";
+    text-transform: uppercase;
+}
+
+.MenuBox .Menu2 li.last {
+    margin-right: 0;
+}
+
+.MenuBox .Menu2 li.on a,.MenuBox .Menu2 li a:hover {
+    background: url(../images/jzfw_icon10.png) no-repeat left bottom;
+}
+
+.MenuBox .Menu2 li.on a span,.MenuBox .Menu2 li a:hover span {
+    color: #FFFFFF;
+}
+
+.MenuBox .Menu2 li.on a em,.MenuBox .Menu2 li a:hover em {
+    color: #FFFFFF;
+}
+
+.MenuBox .Menu3 {
+    margin: 0 0 -25px;
+    position: relative;
+    padding: 0 21px;
+    border-top: 4px solid #ff6b23;
+    height: 140px;
+    background: url(../images/jzfw_menu2.jpg) no-repeat center top;
+}
+
+.MenuBox .Menu3 ul {
+    padding: 14px 0 0;
+}
+
+.MenuBox .Menu3 li {
+    margin: 0 55px;
+    list-style: none;
+    float: left;
+    width: 117px;
+    height: 122px;
+    text-align: center;
+}
+
+.MenuBox .Menu3 li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url(../images/jzfw_icon11.png) repeat-x left top;
+}
+
+.MenuBox .Menu3 span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333333;
+    display: block;
+}
+
+.MenuBox .Menu3 em {
+    padding: 30px 0 0px;
+    display: block;
+    font-style: normal;
+    color: #777777;
+    font-size: 16px;
+    font-family: "Helvetica";
+    text-transform: uppercase;
+}
+
+.MenuBox .Menu3 li.on a,.MenuBox .Menu3 li a:hover {
+    background: url(../images/jzfw_icon12.png) no-repeat left bottom;
+}
+
+.MenuBox .Menu3 li.on a span,.MenuBox .Menu3 li a:hover span {
+    color: #FFFFFF;
+}
+
+.MenuBox .Menu3 li.on a em,.MenuBox .Menu3 li a:hover em {
+    color: #FFFFFF;
+}
+
+.SelectCont {
+    margin: auto;
+    width: 950px;
+    float: center;
+    padding: 0 0 50px;
+}
+
+.SelectCont .Item {
+    position: relative;
+    background: #ffffff;
+    margin-bottom: 30px;
+}
+
+.SelectCont .Item .title {
+    height: 45px;
+    background: url(../images/jzfw_icon1.jpg) repeat-x left bottom;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.SelectCont .Item .title span {
+    color: #333333;
+    font-size: 24px;
+    display: inline-block;
+    border: 1px solid #dadada;
+    padding: 0 31px;
+    height: 43px;
+    line-height: 43px;
+    position: relative;
+}
+
+.SelectCont .Item .title span b {
+    position: absolute;
+    display: block;
+    width: 28px;
+    height: 22px;
+    background: #ff722d;
+    left: -13px;
+    top: 13px;
+    z-index: 1;
+}
+
+.SelectCont .Item .title2 {
+    padding: 0 0 0 32px;
+    margin: -19px 0 0;
+}
+
+.SelectCont .Item .title2 i {
+    color: #555555;
+    font-size: 18px;
+    font-style: normal;
+    display: inline-block;
+    width: 42px;
+    height: 43px;
+    text-align: center;
+    line-height: 43px;
+    background: url(../images/jzfw_icon8.jpg) no-repeat;
+}
+
+.SelectCont .Item .title3 {
+    height: 45px;
+    background: url(../images/jzfw_icon1.jpg) repeat-x left bottom;
+    text-align: center;
+}
+
+.SelectCont .Item .title3 span {
+    color: #333333;
+    font-size: 24px;
+    display: inline-block;
+    border: 1px solid #dadada;
+    padding: 0 31px;
+    height: 43px;
+    line-height: 43px;
+    position: relative;
+}
+
+.SelectCont .Item .title3 span b {
+    position: absolute;
+    display: block;
+    width: 43px;
+    height: 4px;
+    background: #ff6b23;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    bottom: -2px;
+    z-index: 1;
+}
+
+.SelectCont .Item .title4 {
+    text-align: center;
+    background: url(../images/jzfw_icon15.jpg) no-repeat center 37px;
+}
+
+.SelectCont .Item .title4 span {
+    color: #333333;
+    font-size: 24px;
+    display: block;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 0 0 10px;
+}
+
+.SelectCont .Item .title4 p {
+    color: #666666;
+    font-size: 18px;
+    padding: 10px 0 0;
+}
+
+.SelectCont .Item .bot_icon {
+    display: block;
+    width: 43px;
+    height: 38px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 3;
+    background: url(../images/jzfw_icon2.jpg) no-repeat;
+}
+
+/*æœåŠ¡æ ‡å‡†*/
+.SelectCont .standard {
+    padding: 32px 0 0;
+}
+
+.SelectCont .standard .infotxt {
+    padding: 40px 0 0;
+    text-align: center;
+}
+
+.SelectCont .standard .infotxt img {
+    width: 797px;
+    height: 521px;
+}
+
+/*ä¿æ´å¸ˆé£Žé‡‡*/
+.SelectCont .BJStyle {
+    background: url(../images/jzfw_icon5.jpg) repeat-x left bottom #FFFFFF;
+    padding: 38px 0 0;
+}
+
+.SelectCont .BJStyle .infotxt {
+    padding: 51px 32px 51px;
+}
+
+.SelectCont .BJStyle .infotxt li {
+    text-align: center;
+    list-style: none;
+    float: left;
+    width: 156px;
+    padding: 0 29.5px 10px;
+    background: url(../images/jzfw_icon4.jpg) no-repeat right 22px;
+}
+
+.SelectCont .BJStyle .infotxt em {
+    display: block;
+}
+
+.SelectCont .BJStyle .infotxt em img {
+    width: 161px;
+    height: 194px;
+}
+
+.SelectCont .BJStyle .infotxt span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #666666;
+    font-size: 16px;
+    padding: 12px 0 7px;
+}
+
+.SelectCont .BJStyle .infotxt span b {
+    color: #333333;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.SelectCont .BJStyle .infotxt i {
+    display: block;
+    color: #666666;
+    font-size: 16px;
+    font-style: normal;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/*JZFWPage*/
+.JZFWPage .Item1 {
+    padding: 41px 0 49px;
+
+}
+
+.JZFWPage .Item1 .infotxt {
+    padding: 46px 41px 0 21px;
+}
+
+.JZFWPage .Item1 .left {
+    float: left;
+    overflow: hidden;
+    width: 648px;
+}
+
+.JZFWPage .Item1 .left li {
+    list-style: none;
+    float: left;
+    width: 162px;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.JZFWPage .Item1 .left li span {
+    display: block;
+    line-height: 73px;
+    color: #333333;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.JZFWPage .Item1 .left li em {
+    display: block;
+}
+
+.JZFWPage .Item1 .left li em img {
+    width: 97px;
+    height: 97px;
+}
+
+.JZFWPage .Item1 .right {
+    width: 220px;
+    float: right;
+}
+
+.JZFWPage .Item1 .right img {
+    width: 220px;
+    height: 329px;
+}
+
+.JZFWPage .Item2 {
+    padding: 34px 0 0;
+}
+
+.JZFWPage .Item2 .infotxt {
+    padding: 62px 30px 38px;
+    text-align: center;
+}
+
+.JZFWPage .Item2 .infotxt li {
+    list-style: none;
+    float: left;
+    margin: 0 13px;
+    width: 150px;
+    height: 232px;
+    border: 1px solid #f2f2f2;
+    position: relative;
+}
+
+.JZFWPage .Item2 .infotxt li i {
+    display: block;
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: -38px;
+    left: 35px;
+    z-index: 1;
+}
+
+.JZFWPage .Item2 .infotxt li i img {
+    width: 75px;
+    height: 75px;
+}
+
+.JZFWPage .Item2 .infotxt li h3 {
+    color: #555555;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0;
+    padding: 55px 0 0;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.JZFWPage .Item2 .infotxt li p {
+    line-height: 22px;
+    color: #888888;
+    font-size: 14px;
+    margin: 0;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.JZFWPage .Item2 .infotxt li em {
+    color: #555555;
+    font-size: 16px;
+    font-style: normal;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 15px 0;
+}
+
+.JZFWPage .Item2 .infotxt li em b {
+    font-size: 26px;
+}
+
+.JZFWPage .Item2 .infotxt li span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.JZFWPage .Item2 .infotxt li span img {
+    padding: 0 1px;
+}
+
+.JZFWPage .Item2 .infotxt li label {
+    padding: 16px 12px;
+    color: #888888;
+    font-size: 14px;
+    display: block;
+    text-align: justify;
+    word-wrap: break-word;
+}
+
+.JZFWPage .Item3 {
+    padding: 42px 0 0;
+}
+
+.JZFWPage .Item3 .infotxt {
+    padding: 40px 0 38px;
+    text-align: center;
+}
+
+.JZFWPage .Item3 .infotxt img {
+    width: 867px;
+    height: 117px;
+}
+
+.JZFWPage .Item3 .infotxt table {
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    border-width: 1px 0 0 1px;
+    width: 91.4%;
+    margin: 24px auto 0;
+}
+
+.JZFWPage .Item3 .infotxt td {
+    width: 16.6%;
+    line-height: 58px;
+    border: 1px solid #e1e1e1;
+    border-width: 0 1px 1px 0;
+    color: #555555;
+    font-size: 16px;
+}
+
+.JZFWPage .Item3 .infotxt .td1 {
+    background: #ff6b23;
+    color: #FFFFFF;
+}
+
+.JZFWPage .Item3 .infotxt .td2 {
+    background: #acacac;
+    color: #FFFFFF;
+}
+
+.JZFWPage .Item3 .infotxt td.last {
+    border-right: 0 ;
+}
+
+.JZFWPage .Item4 {
+    padding: 42px 0 0;
+    background: #FFFFFF;
+}
+
+.JZFWPage .Item4 .infotxt {
+    padding: 28px 11px 38px;
+    text-align: center;
+}
+
+.JZFWPage .Item4 .infotxt li {
+    list-style: none;
+    float: left;
+    width: 174px;
+    padding: 0 29px;
+}
+
+.JZFWPage .Item4 .infotxt li b {
+    display: block;
+}
+
+.JZFWPage .Item4 .infotxt li b img {
+    display: block;
+    width: 174px;
+    height: 174px;
+}
+
+.JZFWPage .Item4 .infotxt li span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 18px;
+    color: #333333;
+    padding: 10px 0 2px;
+}
+
+.JZFWPage .Item4 .infotxt li em {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: "Helvetica";
+    font-style: normal;
+    font-size: 14px;
+    color: #333333;
+    text-transform: uppercase;
+}
+
+.JZFWPage .Item4 .infotxt li p {
+    color: #333333;
+    font-size: 14px;
+    line-height: 26px;
+    height: 104px;
+    overflow: hidden;
+    margin: 0;
+    margin: 15px 0 10px;
+}
+
+.JZFWPage .Item5 {
+    padding: 42px 0 0;
+    background: #FFFFFF;
+}
+
+.JZFWPage .Item5 .infotxt {
+    padding: 37px 0 3px 81px;
+    text-align: center;
+}
+
+.JZFWPage .Item5 .infotxt ul {
+    margin-bottom: 41px;
+    overflow: hidden;
+}
+
+.JZFWPage .Item5 .infotxt label {
+    float: left;
+    margin-right: 24px;
+}
+
+.JZFWPage .Item5 .infotxt label img {
+    width: 36px;
+    height: 143px;
+}
+
+.JZFWPage .Item5 .infotxt li {
+    margin: 5px 0 0;
+    list-style: none;
+    float: left;
+    width: 152px;
+    height: 141px;
+    padding: 0 20px;
+}
+
+.JZFWPage .Item5 .infotxt li span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 76px;
+    line-height: 76px;
+    font-size: 18px;
+    color: #555555;
+    width: 150px;
+    border-left: 1px solid #f2f2f2;
+    border-right: 1px solid #f2f2f2;
+    border-top: 3px solid #dcdcdc;
+}
+
+.JZFWPage .Item5 .infotxt li em {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 62px;
+    line-height: 62px;
+    font-size: 16px;
+    color: #ffffff;
+    font-style: normal;
+    background: #ff6b23;
+}
+
+.JZFWPage .Item5 .infotxt li em b {
+    font-size: 26px;
+}
+
+.JZFWPage .Item5 .infotxt li p {
+    font-size: 16px;
+    color: #ffffff;
+    line-height: 23px;
+    display: block;
+    height: 46px;
+    background: #ff6b23;
+    padding: 8px 0;
+    overflow: hidden;
+}
+
+.JZFWPage .Item5 .infotxt li.last {
+}
+
+.JZFWPage .Item5 .infotxt li.last em {
+    height: 141px;
+    line-height: 141px;
+    background: #8b8b8b;
+    position: relative;
+}
+
+.JZFWPage .Item5 .infotxt li.last em b {
+    font-size: 26px;
+    font-weight: normal;
+}
+
+.JZFWPage .Item5 .infotxt li.last i {
+    display: block;
+    width: 11px;
+    height: 21px;
+    position: absolute;
+    left: 0;
+    top: 62px;
+    z-index: 3;
+    background: url(../images/jzfw_icon7.jpg) no-repeat;
+}
+
+.JZFWPage .Item7 {
+    padding: 42px 0 0;
+}
+
+.JZFWPage .Item7 .infotxt {
+    padding: 23px 0 54px;
+    text-align: center;
+}
+
+.JZFWPage .Item7 .infotxt img {
+    width: 878px;
+    height: 312px;
+}
+
+.JZFWPage .Item8 {
+    padding: 42px 0 0;
+}
+
+.JZFWPage .Item8 .infotxt {
+    padding: 27px 0 62px;
+    text-align: center;
+}
+
+.JZFWPage .Item8 .infotxt table {
+    width: 93%;
+    margin: 0 auto;
+    border: 1px solid #dcdcdc;
+    border-width: 1px 0 0 1px;
+}
+
+.JZFWPage .Item8 .infotxt table th {
+    color: #ffffff;
+    font-size: 20px;
+    background: #ff6b23;
+    padding: 8px 0;
+}
+
+.JZFWPage .Item8 .infotxt table td {
+    width: 25%;
+    color: #888888;
+    font-size: 20px;
+    border: 1px solid #dcdcdc;
+    border-width: 0 1px 1px 0 ;
+    padding: 8px 0;
+}
+
+.JZFWPage .Item9 {
+    padding: 42px 0 0;
+}
+
+.JZFWPage .Item9 .infotxt {
+    padding: 57px 0 49px;
+    text-align: center;
+}
+
+.JZFWPage .Item9 .infotxt img {
+}
+
+.JZFWPage .Item10 {
+    padding: 42px 0 0;
+}
+
+.JZFWPage .Item10 .infotxt {
+    padding: 23px 37px 12px;
+    text-align: center;
+}
+
+.JZFWPage .Item10 .infotxt li {
+    list-style: none;
+    float: left;
+    width: 115px;
+    height: 176px;
+    margin: 32px 30px;
+    text-align: center;
+    background: url(../images/jzfw_icon13.png) no-repeat;
+}
+
+.JZFWPage .Item10 .infotxt li span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #333333;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 18px 0 0;
+}
+
+.JZFWPage .Item10 .infotxt li em {
+}
+
+.JZFWPage .Item10 .infotxt li em img {
+    width: 114px;
+    height: 114px;
+}
+
+.JZFWPage .Item11 {
+    padding: 38px 0 0;
+}
+
+.JZFWPage .Item11 .infotxt {
+    padding: 57px 35px 15px;
+}
+
+.JZFWPage .Item11 .infotxt li {
+    text-align: center;
+    list-style: none;
+    float: left;
+    width: 210px;
+    margin: 0 5px 20px;
+    position: relative;
+}
+
+.JZFWPage .Item11 .infotxt li label {
+    color: #333333;
+    font-size: 16px;
+    display: block;
+    padding: 10px 0 5px;
+}
+
+.JZFWPage .Item11 .infotxt li i {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: url(../images/jzfw_icon14.png) no-repeat;
+    position: absolute;
+    left: 92px;
+    top: 130px;
+    z-index: 3;
+}
+
+.JZFWPage .Item11 .infotxt em {
+    display: block;
+}
+
+.JZFWPage .Item11 .infotxt em img {
+    width: 210px;
+    height: 145px;
+}
+
+.JZFWPage .Item11 .infotxt span {
+    padding: 25px 0 5px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #ff6b23;
+    font-size: 16px;
+    background: url(../images/jzfw_icon11.jpg) no-repeat center bottom;
+}
+
+.JZFWPage .Item11 .infotxt span b {
+    padding: 0 0 0 12px;
+}
+
+.JZFWPage .Item11 .infotxt span b img {
+    width: 13px;
+    height: 13px;
+    margin: 0 1px;
+}
+
+.JZFWPage .Item11 .infotxt p {
+    text-align: center;
+    color: #666666;
+    font-size: 12px;
+    line-height: 18px;
+    height: 36px;
+    overflow: hidden;
+    word-wrap: break-word;
+    padding: 5px 0 0;
+}
+
+.JZFWPage .Item12 {
+    background: url(../images/jzfw_icon5.jpg) repeat-x left bottom #FFFFFF;
+    padding: 38px 0 0;
+}
+
+.JZFWPage .Item12 .infotxt {
+    padding: 51px 5px 20px;
+}
+
+.JZFWPage .Item12 .infotxt li {
+    text-align: center;
+    list-style: none;
+    float: left;
+    width: 161px;
+    margin: 0 37px 20px;
+    border-top: 2px solid #ff6b23;
+}
+
+.JZFWPage .Item12 .infotxt li label {
+    color: #333333;
+    font-size: 16px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 10px 0 5px;
+}
+
+.JZFWPage .Item12 .infotxt em {
+    display: block;
+}
+
+.JZFWPage .Item12 .infotxt em img {
+    width: 161px;
+    height: 194px;
+}
+
+.JZFWPage .Item12 .infotxt span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #666666;
+    font-size: 14px;
+}
+
+.JZFWPage .Item12 .infotxt span b {
+    padding: 0 0 0 12px;
+    vertical-align: 3px;
+}
+
+.JZFWPage .Item12 .infotxt span b img {
+    width: 13px;
+    height: 13px;
+    margin: 0 1px;
+}
+
+.JZFWPage .Item12 .infotxt p {
+    color: #666666;
+    font-size: 12px;
+    text-align: center;
+    word-wrap: break-word;
+    line-height: 16px;
+    height: 32px;
+    overflow: hidden;
+}
+
+.JZFWPage .Item13 {
+    padding: 38px 0 0;
+}
+
+.JZFWPage .Item13 .infotxt {
+    padding: 59px 87px 32px;
+}
+
+.JZFWPage .Item13 .infotxt li {
+    list-style: none;
+    float: left;
+    padding: 0 37px;
+}
+
+.JZFWPage .Item13 .infotxt li img {
+    width: 120px;
+    height: 128px;
+}
+
+.JZFWPage .Item14 {
+    padding: 38px 0 0;
+    background: url(../images/jzfw_icon13.jpg) no-repeat center top #FFFFFF;
+}
+
+.JZFWPage .Item14 .infotxt {
+    padding: 60px 0 45px 59px;
+}
+
+.JZFWPage .Item14 .infotxt .leftimg {
+    list-style: none;
+    float: left;
+    width: 445px;
+    height: 251px;
+    margin-right: 29px;
+}
+
+.JZFWPage .Item14 .infotxt .leftimg img {
+    width: 445px;
+    height: 251px;
+}
+
+.JZFWPage .Item14 .infotxt .info {
+    float: left;
+    width: 355px;
+    padding: 51px 0 0;
+}
+
+.JZFWPage .Item14 .infotxt .info h3 {
+    color: #333333;
+    font-size: 18px;
+    font-weight: normal;
+    padding: 36px 0 0;
+    background: url(../images/jzfw_icon12.jpg) no-repeat left top;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.JZFWPage .Item14 .infotxt .info p {
+    color: #666666;
+    font-size: 14px;
+    line-height: 24px;
+    height: 120px;
+    overflow: hidden;
+}
+
+.JZFWPage .Item14 .infotxt .info i {
+    display: block;
+    width: 56px;
+    height: 2px;
+    background: #ff6b23;
+    margin: 8px 0 0;
+}
+
+.JZFWPage .Item15 {
+    padding: 38px 0 0;
+    background: url(../images/jzfw_icon13.jpg) no-repeat center top #FFFFFF;
+}
+
+.JZFWPage .Item15 .infotxt {
+    padding: 48px 0 37px 32px;
+}
+
+.JZFWPage .Item15 .infotxt table {
+    border: 1px solid #e2e2e2;
+    border-width: 1px 0 0 1px;
+}
+
+.JZFWPage .Item15 .infotxt tr.backrow {
+    background-color: #fff7f3;
+}
+
+.JZFWPage .Item15 .infotxt tr {
+    background-color: #fde8de;
+}
+
+.JZFWPage .Item15 .infotxt td {
+    text-align: center;
+    border: 1px solid #e2e2e2;
+    border-width: 0 1px 1px 0 ;
+    padding: 16px 0;
+}
+
+.JZFWPage .Item15 .infotxt th {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    background: #ff6b23;
+    padding: 21px 0 15px;
+}
+
+.JZFWPage .Item15 .infotxt .td1 {
+    width: 200px;
+}
+
+.JZFWPage .Item15 .infotxt .td2 {
+    width: 211px;
+}
+
+.JZFWPage .Item15 .infotxt .td3 {
+    width: 100px;
+}
+
+.JZFWPage .Item15 .infotxt .td4 {
+    width: 369px;
+}
+
+.JZFWPage .Item16 {
+    padding: 38px 0 0;
+    background: url(../images/jzfw_icon13.jpg) no-repeat center top #FFFFFF;
+}
+
+.JZFWPage .Item16 .infotxt {
+    padding: 42px 0 30px 68px;
+}
+
+.JZFWPage .Item16 .infotxt ul {
+    background: url(../images/jzfw_icon14.jpg) repeat-y 70px bottom;
+    padding: 31px 0 15px;
+    overflow: hidden;
+}
+
+.JZFWPage .Item16 .infotxt li {
+    list-style: none;
+    padding-bottom: 16px;
+}
+
+.JZFWPage .Item16 .infotxt li .pic {
+    list-style: none;
+    float: left;
+    width: 138px;
+    height: 140px;
+    margin-right: 29px;
+}
+
+.JZFWPage .Item16 .infotxt li .pic img {
+    width: 138px;
+    height: 140px;
+}
+
+.JZFWPage .Item16 .infotxt li .info {
+    float: left;
+    width: 622px;
+    border-bottom: 1px solid #e2e2e2;
+    height: 152px;
+    overflow: hidden;
+}
+
+.JZFWPage .Item16 .infotxt li .info em {
+    color: #ff6b23;
+    font-size: 20px;
+    line-height: 24px;
+    display: block;
+    margin: 18px 0 8px;
+    font-style: normal;
+    line-height: 25px;
+    height: 50px;
+    width: 540px;
+    overflow: hidden;
+}
+
+.JZFWPage .Item16 .infotxt li .info i {
+    line-height: 28px;
+    height: 56px;
+    font-style: normal;
+    overflow: hidden;
+    color: #333333;
+    font-size: 14px;
+    display: block;
+}
+
+.JZFWPage .Item16 .infotxt li.last .info {
+    border-bottom: 0;
+}
+
+.JZFWPage .Item17 {
+    padding: 41px 0 49px;
+}
+
+.JZFWPage .Item17 .infotxt {
+    padding: 46px 45px 0 38px;
+}
+
+.JZFWPage .Item17 .left {
+    float: left;
+    overflow: hidden;
+    width: 522px;
+}
+
+.JZFWPage .Item17 .left li {
+    list-style: none;
+    float: left;
+    width: 174px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.JZFWPage .Item17 .left li span {
+    display: block;
+    line-height: 60px;
+    color: #333333;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.JZFWPage .Item17 .left li em {
+    display: block;
+}
+
+.JZFWPage .Item17 .left li em img {
+    width: 111px;
+    height: 111px;
+}
+
+.JZFWPage .Item17 .right {
+    width: 309px;
+    height: 341px;
+    float: right;
+}
+
+.JZFWPage .Item17 .right img {
+    width: 309px;
+    height: 341px;
+}
+
+.JZFWPage .Item18 {
+    padding: 42px 0 0;
+    background: #FFFFFF;
+}
+
+.JZFWPage .Item18 .infotxt {
+    padding: 37px 0 3px 81px;
+    text-align: center;
+}
+
+.JZFWPage .Item18 .infotxt ul {
+    margin-bottom: 41px;
+    overflow: hidden;
+    margin-left: 99px;
+}
+
+.JZFWPage .Item18 .infotxt label {
+    float: left;
+    margin-right: 24px;
+}
+
+.JZFWPage .Item18 .infotxt label img {
+    width: 36px;
+    height: 143px;
+}
+
+.JZFWPage .Item18 .infotxt li {
+    margin: 5px 0 0;
+    list-style: none;
+    float: left;
+    width: 152px;
+    height: 141px;
+    padding: 0 20px;
+}
+
+.JZFWPage .Item18 .infotxt li span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 76px;
+    line-height: 76px;
+    font-size: 18px;
+    color: #555555;
+    border-top: 3px solid #dcdcdc;
+    background: #eeeeee;
+}
+
+.JZFWPage .Item18 .infotxt li em {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 62px;
+    line-height: 62px;
+    font-size: 24px;
+    color: #ffffff;
+    font-style: normal;
+    background: #ff6b23;
+}
+
+.JZFWPage .Item18 .infotxt li em b {
+    font-size: 26px;
+}
+
+.JZFWPage .Item18 .infotxt li.last {
+    width: 321px;
+}
+
+/*LMenu*/
+.LMenu {
+    width: 75px;
+    position: absolute;
+    left: -84px;
+}
+
+.LMenu li {
+    list-style: none;
+    width: 75px;
+    height: 75px;
+    margin-bottom: 6px;
+}
+
+.LMenu li a {
+    display: table;
+    width: 75px;
+    height: 75px;
+    background: url(../images/e_lmenu_bg.png) no-repeat;
+    line-height: 75px;
+    text-align: center;
+}
+
+.LMenu li a i {
+    font-style: normal;
+    line-height: 17px;
+    display: table-cell;
+    color: #ff6b23;
+    font-size: 14px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.LMenu li.on a,.LMenu li a:hover {
+    background: url(../images/e_lmenu_bg2.png) no-repeat;
+}
+
+.LMenu li.on a i,.LMenu li a:hover i {
+    color: #FFFFFF;
+}
+
+/*LMenu*/
+
+/* 家电清洁 */
+JDQXPage .Item1 .infotxt .itmeimgs {
+    text-align: center;
+    padding: 60px 0px;
+}
+
+.JDQXPage .Item1 .infotxt .itmeimgs img {
+    margin: 50px;
+}
+
+.JDQXPage .Item2 .infotxt {
+    padding: 30px 0px 70px 0px;
+}
+
+.JDQXPage .Item2 .infotxt ul li {
+    list-style: none;
+    width: 176px;
+    height: 106px;
+    text-align: center;
+    font-family: 'Microsoft YaHei';
+    font-size: 18px;
+    float: center;
+    margin: 30px;
+}
+
+.JDQXPage .Item2 .infotxt ul li p {
+    margin: 15px auto;
+    color: #333333;
+}
+
+.JDQXPage .Item2 .infotxt ul li p span {
+    width: 120px;
+    background-color: #ff6600;
+    display: block;
+    color: #fff;
+    height: 36px;
+    line-height: 36px;
+    margin: 0px auto;
+}
+
+.JDQXPage .Item2 .infotxt ul li p:last-child {
+    color: #ff6600;
+}
+
+.JDQXPage .Item2 .infotxt ul li p:last-child b {
+    font-size: 24px;
+    padding: 0px 6px;
+}
+
+.JDQXPage .Item2 .infotxt img {
+    width: 100%;
+    height: auto;
+}
+
+.dscfw {
+    width: 650px;
+    margin: 0 auto;
+}
+
+.dscfwl {
+    float: left;
+    width: auto;
+    padding: 0 22px;
+    font-weight: none;
+}
+
+.dsc {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-left: 1px solid #d2d2d2;
+    border-top: 1px solid #d2d2d2;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+
+.dsc th,
+td {
+    border-right: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
+    padding: 5px 15px;
+    font-weight: 300;
+}
+
+.dsc th {
+    color: #282828;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+/* 收纳整理 */
+.arrange{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    left: 520px;
+    width: 100%;
+    height: auto;
+    animation: auto ease 0s 1 normal none running none;
+}
+.arrange .content1{
+    /* position: absolute; */
+    margin: 0 auto;
+    width: 1000px;
+    height: auto;
+}
+
