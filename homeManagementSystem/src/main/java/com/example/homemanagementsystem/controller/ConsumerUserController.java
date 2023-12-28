@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/consumerUser")
@@ -203,5 +204,16 @@ public class ConsumerUserController {
         }
 
         return Result.success(user);
+    }
+
+    /**
+     * 批量删除消费者用户
+     * @param ids 消费者用户id
+     * @return Result
+     */
+    @DeleteMapping("/consumerUser/deleteAllConsumerUser/{ids}")
+    public Result deleteAllAdminUser(@PathVariable List<Integer> ids) {
+        consumerUserService.deleteAllConsumerUser(ids);
+        return Result.success();
     }
 }

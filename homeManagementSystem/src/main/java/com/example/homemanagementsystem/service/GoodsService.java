@@ -12,4 +12,51 @@ public interface GoodsService {
      * @return 服务列表
      */
     List<Goods> listByKind(Integer id);
+
+    /**
+     * 获取商品信息
+     * @param id 商品id
+     * @return 商品对象
+     */
+    Goods getGoodsInfo(Integer id);
+
+    /**
+     * 上传图片
+     * @param id 商品id
+     * @param url 图片url
+     */
+    void uploadImage(Integer id, String url);
+
+    /**
+     * 分页查询所有商品信息
+     * @param page 页码
+     * @param pageSize 分页大小
+     * @return
+     */
+    PageBean getAllGoods(Integer page, Integer pageSize);
+
+    /**
+     * 删除商品
+     * @param ids 商品id
+     * @return Result
+     */
+    void removeGoods(List<Integer> ids);
+
+    /**
+     * 修改商品信息
+     * @param goods 商品对象
+     */
+    void updategoods(Goods goods);
+
+    /**
+     * 添加
+     * @param goods 商品对象
+     */
+    void insertgoods(Goods goods);
+
+    /**
+     * 批量删除商品
+     * @param ids 商品id
+     */
+    void deleteAllGoods(List<Integer> ids);
 }

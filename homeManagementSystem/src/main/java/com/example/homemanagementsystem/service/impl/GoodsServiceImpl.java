@@ -29,6 +29,15 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public PageBean getAllGoods(Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+        List<Goods> goods = goodsMapper.getAllGoods();
+        Page<Goods> p = (Page<Goods>) goods;
+        PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
+        return pageBean;
+    }
+
+    @Override
     public void removeGoods(List<Integer> ids) {
         goodsMapper.deleteGoods(ids);
     }
@@ -36,5 +45,23 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public void uploadImage(Integer id, String url) {
         goodsMapper.updateImage(id, url);
+    }
+
+    // 修改
+    @Override
+    public void updategoods(Goods goods) {
+        goodsMapper.updategoods(goods);
+    }
+
+    // 新增
+    @Override
+    public void insertgoods(Goods goods) {
+        goodsMapper.insertgoods(goods);
+    }
+
+    // 批量删除
+    @Override
+    public void deleteAllGoods(List<Integer> ids) {
+        goodsMapper.deleteAllGoods(ids);
     }
 }

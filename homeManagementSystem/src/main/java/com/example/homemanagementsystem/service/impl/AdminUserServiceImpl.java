@@ -1,9 +1,6 @@
 package com.example.homemanagementsystem.service.impl;
 
-import com.example.homemanagementsystem.mapper.AdminUserMapping;
-import com.example.homemanagementsystem.mapper.ConsumerUserMapper;
-import com.example.homemanagementsystem.mapper.GoodsMapper;
-import com.example.homemanagementsystem.mapper.KindsMapper;
+import com.example.homemanagementsystem.mapper.AdminUserMapper;
 import com.example.homemanagementsystem.pojo.*;
 import com.example.homemanagementsystem.service.AdminUserService;
 import com.github.pagehelper.Page;
@@ -17,47 +14,63 @@ import java.util.List;
 public class AdminUserServiceImpl implements AdminUserService {
 
     @Autowired
-    private AdminUserMapping adminUserMapping;
+    private AdminUserMapper adminUserMapper;
 
-    @Autowired
-    private ConsumerUserMapper consumerUserMapper;
-
-    @Autowired
-    private KindsMapper kindsMapper;
-
-    @Autowired
-    private GoodsMapper goodsMapper;
-
+    // 登录
     @Override
     public AdminUser login(AdminUser adminUser) {
-        return adminUserMapping.getUserByUsernameAndPassword(adminUser);
+        return adminUserMapper.getUserByUsernameAndPassword(adminUser);
+    }
+
+    // 注册
+    @Override
+    public void register(AdminUser adminUser) {
+        adminUserMapper.insertadminUser(adminUser);
+    }
+
+    // 通过id查询信息
+    @Override
+    public AdminUser getUserInfo(Integer id) {
+        return adminUserMapper.getUserById(id);
+    }
+
+    // 修改用户信息
+    @Override
+    public void editUserInfo(AdminUser adminUser) {
+        adminUserMapper.updateUser(adminUser);
+    }
+
+    // 修改密码
+    @Override
+    public Result editPassword(Integer id, String password) {
+        AdminUser adminUser = adminUserMapper.getUserById(id);
+        // 如果原密码与新密码相同
+        if (password.equals(adminUser.getPassword())) {
+            return Result.error("原密码与新密码相同");
+        }
+        adminUserMapper.updatePassword(id, password);
+        return Result.success();
+    }
+
+    // 删除
+    @Override
+    public void deleteAdminUser(String username) {
+        adminUserMapper.deleteByName(username);
+    }
+
+    // 批量删除
+    @Override
+    public void deleteAllAdminUser(List<Integer> ids) {
+        adminUserMapper.deleteAllAdminUser(ids);
     }
 
     @Override
-    public PageBean getAllKinds(Integer page, Integer pageSize) {
+    public PageBean getAdminUser(Integer page, Integer pageSize) {
         PageHelper.startPage(page, pageSize);
 
-        List<Kinds> kindsList = kindsMapper.selectAll();
-        Page<Kinds> p = (Page<Kinds>) kindsList;
-
-        PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
-
-        return pageBean;
-    }
-
-    @Override
-    public PageBean getAllGoods(Integer page, Integer pageSize) {
-        PageHelper.startPage(page, pageSize);
-
-        List<Goods> goods = goodsMapper.getAllGoods();
-        Page<Goods> p = (Page<Goods>) goods;
-
+        List<AdminUser> adminUsers = adminUserMapper.getAllUser();
+        Page<AdminUser> p = (Page<AdminUser>) adminUsers;
         PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
         return pageBean;
-    }
-
-    @Override
-    public Goods getGoodsInfo(Integer id) {
-        return goodsMapper.getById(id);
     }
 }

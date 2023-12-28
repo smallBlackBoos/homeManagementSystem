@@ -80,5 +80,9 @@ public interface ConsumerUserMapper {
     @Update("update consumer_user set money = money + #{money} where id = #{id}")
     void updateMoney(Integer id, Double money);
 
-
+    /**
+     * 通过id删除管理员
+     * @param ids 管理员id列表
+     */
+    void deleteAllConsumerUser(List<Integer> ids);
 }

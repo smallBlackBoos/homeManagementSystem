@@ -2,6 +2,7 @@ package com.example.homemanagementsystem.mapper;
 
 import com.example.homemanagementsystem.pojo.Goods;
 import com.example.homemanagementsystem.pojo.PageBean;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -46,4 +47,25 @@ public interface GoodsMapper {
      * @param ids 商品id列表
      */
     void deleteGoods(List<Integer> ids);
+
+    /**
+     * 修改商品信息
+     * @param goods 商品对象
+     */
+    void updategoods(Goods goods);
+
+
+    /**
+     * 添加
+     * @param goods 要添加的商品对象
+     */
+    @Insert("insert into goods(id, kinds_id, good_name, price) values (#{id},#{kinds_id}, #{good_name}, #{price})")
+    void insertgoods(Goods goods);
+
+
+    /**
+     * 通过id删除商品
+     * @param ids 商品id列表
+     */
+    void deleteAllGoods(List<Integer> ids);
 }

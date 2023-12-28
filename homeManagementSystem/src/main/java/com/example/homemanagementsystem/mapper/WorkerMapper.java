@@ -85,4 +85,17 @@ public interface WorkerMapper {
      */
     @Update("update worker set status = #{status} where id = #{workerId}")
     void updateStatus(Integer workerId, Integer status);
+
+    /**
+     * 修改家政人员信息
+     * @param worker 家政人员对象
+     */
+    void updateWorker(Worker worker);
+
+    /**
+     * 通过id删除商品
+     * @param ids 家政人员id列表
+     */
+    void deleteAllWorker(List<Integer> ids);
+
 }
