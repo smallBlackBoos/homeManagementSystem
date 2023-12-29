@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+    <head>
+        <meta charset="UTF-8">
+        <title>家政系统-服务人员界面</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <link rel="stylesheet" href="../static/worker/css/font.css">
+        <link rel="stylesheet" href="../static/worker/css/xadmin.css">
+        <link rel="stylesheet" href="../static/worker/lib/layui/css/layui.css">
+        <script src="../static/worker/js/jquery.min.js"></script>
+        <script src="../static/worker/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="../static/worker/js/xadmin.js"></script>
+        <script type="text/javascript" src="../static/worker/js/user.js"></script>
+
+        <style>
+            img{
+                width:100px;
+                height:100px;
+            }
+        </style>
+
+        
+    </head>
+    <body>
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body ">
+                            <blockquote class="layui-elem-quote">欢迎用户：<span class="x-red">111</span>！
+                                <br/>
+                                当前时间:<span id="time1" ></span>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">个人信息</div>
+                        <div class="layui-card-body ">
+                            <table class="layui-table">
+                                <tbody>
+                                    <tr>
+                                        <th>头像</th>
+                                        <td><img src="../static/worker/images/1.jpg" alt="" />
+                                            <div class="base-input col-sm-10">
+                                                <div class="upload ">
+                                                    <input type="file" class="upload-input" />
+                                                    <button type="botton" class="btn btn-default btn-ghost">上传图片</button>
+                                                </div>
+                                            </div>
+                                        </td></tr>
+                                    <tr>
+                                        <th>用户名</th>
+                                        <td>
+                                            <div class="base-input col-sm-10">
+                                                <input type="text" class="form-control" placeholder="用户名" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                        <!-- <td>111</td></tr> -->
+                                    <tr>
+                                        <th>姓名</th>
+                                        <td>
+                                            <div class="base-input col-sm-10">
+                                                <input type="text" class="form-control" placeholder="姓名" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>性别</th>
+                                        <td>
+                                            <div class="base-input col-sm-10">
+                                                <input type="radio" name="sex" value="1" />
+                                                <label for="1">男</label>
+                                                <input type="radio" name="sex" value="2" />
+                                                <label for="2">女</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>年龄</th>
+                                        <td>
+                                            <div class="base-input col-sm-10">
+                                                <input type="text" class="form-control" placeholder="年龄" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>地址</th>
+                                        <td>
+                                            <div class="base-input col-sm-10">
+                                                <input type="text" class="form-control" placeholder="地址" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>手机号</th>
+                                        <td>
+                                            <div class="base-input col-sm-10">
+                                                <input type="text" class="form-control" placeholder="手机号" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>邮箱</th>
+                                        <td>
+                                            <div class="base-input col-sm-10">
+                                                <input type="text" class="form-control" placeholder="邮箱" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>简介</th>
+                                        <td>本人性格活泼开朗，善于与人沟通，有较强的交际技巧。工作认真负责，细心、有条理，能够及时准确地完成各项工作</td></tr>
+                                    <tr>
+                                        <th>工作状态</th>
+                                        <td>
+                                            <div class="base-input col-sm-10">
+                                                <input type="radio" name="status" value="1" />
+                                                <label for="1">工作中</label>
+                                                <input type="radio" name="status" value="2" />
+                                                <label for="2">无</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="upload base-input col-sm-10 col-sm-offset-2">
+                                <button type="button" class="layui-btn" data-method="confirmTransB"
+                                    class="btn btn-default alert-btn">保存资料</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script type ="text/javascript" >
+
+    function mytime() {
+
+        var a = new Date();
+
+        var b = a.toLocaleTimeString();
+
+        var c = a.toLocaleDateString();
+
+        document.getElementById("time1").innerHTML = c + "&nbsp" + b;
+
+    }
+
+    setInterval(function () { mytime() }, 1000);
+
+
+</script>
