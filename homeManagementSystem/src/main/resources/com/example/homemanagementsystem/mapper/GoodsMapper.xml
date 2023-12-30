@@ -16,6 +16,27 @@
             left join kinds k on k.id = g.kinds_id
     </select>
 
+    <!-- 更新商品信息 -->
+    <update id="updateGoods">
+        update goods set kinds_id =  where ;
+
+        update goods
+        <set>
+            <if test="kindsId != null">
+                kinds_id = #{kindsId}
+            </if>
+
+            <if test="goodsName != null and goodsName != ''">
+                goods_name = #{goodsName}
+            </if>
+
+            <if test="price != null">
+                price = #{price}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
     <!-- 批量删除商品 -->
     <delete id="deleteGoods">
         delete

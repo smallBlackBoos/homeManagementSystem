@@ -1,6 +1,5 @@
 package com.example.homemanagementsystem.controller;
 
-import com.example.homemanagementsystem.pojo.AdminUser;
 import com.example.homemanagementsystem.pojo.PageBean;
 import com.example.homemanagementsystem.pojo.Result;
 import com.example.homemanagementsystem.pojo.Worker;
@@ -19,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/worker")
 public class WorkerController {
 
     @Autowired
@@ -27,38 +27,15 @@ public class WorkerController {
     @Autowired
     private QiniuKodoUtils qiniuKodoUtils;
 
-    /**
-     * 查看所有空闲的家政人员
-     * @return 家政人员列表
-     */
-    @GetMapping("/consumerUser/browseLeisureWorker")
-    public Result browseLeisureWorker() {
-        List<Integer> workers = workerService.browseLeisureWorker();
 
-        return Result.success(workers);
-    }
-
-    /**
-     * 分页查询所有家政人员信息
-     * @param page 页数
-     * @param pageSize 每页展示的数据条数
-     * @return
-     */
-    @GetMapping("/adminUser/getAllWorker")
-    public Result getAllWorker(@RequestParam(defaultValue = "1") Integer page,
-                              @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageBean pageBean = workerService.getAllWorker(page, pageSize);
-
-        return Result.success(pageBean);
-    }
 
     /**
      * 取现
      * @param id 家政人员id
      * @param money 提取金额
-     * @return
+     * @return Result
      */
-    @PutMapping("/worker/withdrawCash")
+    @PutMapping("/withdrawCash")
     public Result withdrawCash(Integer id, String password, Double money) {
         workerService.withdrawCash(id, password, money);
         return Result.success();
@@ -68,10 +45,9 @@ public class WorkerController {
      * 上传头像
      * @param image 图片
      * @return 结果
-     * @throws IOException
      */
     @Transactional
-    @PostMapping("/worker/upload")
+    @PostMapping("/upload")
     public Result upload(MultipartFile image, HttpServletRequest request) throws IOException {
 
         // 上传文件
@@ -107,41 +83,6 @@ public class WorkerController {
             qiniuKodoUtils.delete(oldUrl);
         }
 
-        return Result.success();
-    }
-
-    /**
-     * 删除家政人员
-     * @param ids 家政人员id
-     * @return Result
-     */
-    @DeleteMapping("/adminUser/removeWorker/{ids}")
-    public Result removeWorker(@PathVariable List<Integer> ids) {
-
-        workerService.removeWorker(ids);
-
-        return Result.success();
-    }
-
-    /**
-     * 修改个人信息
-     * @param worker 家政人员对象
-     * @return
-     */
-    @PutMapping("/updateWorkerInfo")
-    public Result updateWorkerInfo(@RequestBody Worker worker) {
-        workerService.updateWorkerInfo(worker);
-        return Result.success();
-    }
-
-    /**
-     * 批量删除家政人员
-     * @param ids 家政人员id
-     * @return Result
-     */
-    @DeleteMapping("/adminUser/deleteAllWorker/{ids}")
-    public Result deleteAllWorker(@PathVariable List<Integer> ids) {
-        workerService.deleteAllWorker(ids);
         return Result.success();
     }
 }

@@ -29,6 +29,18 @@ public interface GoodsMapper {
     Goods getById(Integer id);
 
     /**
+     * 查询所有商品信息
+     * @return
+     */
+    List<Goods> getAllGoods();
+
+    /**
+     * 修改商品信息
+     * @param goods 商品对象
+     */
+    void updateGoods(Goods goods);
+
+    /**
      * 修改图片路径
      * @param id 商品id
      * @param url 图片url
@@ -37,35 +49,15 @@ public interface GoodsMapper {
     void updateImage(Integer id, String url);
 
     /**
-     * 查询所有商品信息
-     * @return
+     * 添加商品
+     * @param goods 商品对象
      */
-    List<Goods> getAllGoods();
+    @Insert("insert into goods(kinds_id, good_name, price) values (#{kindsId}, #{goodsName}, #{price}) ")
+    void insertGoods(Goods goods);
 
     /**
      * 删除商品
      * @param ids 商品id列表
      */
     void deleteGoods(List<Integer> ids);
-
-    /**
-     * 修改商品信息
-     * @param goods 商品对象
-     */
-    void updategoods(Goods goods);
-
-
-    /**
-     * 添加
-     * @param goods 要添加的商品对象
-     */
-    @Insert("insert into goods(id, kinds_id, good_name, price) values (#{id},#{kinds_id}, #{good_name}, #{price})")
-    void insertgoods(Goods goods);
-
-
-    /**
-     * 通过id删除商品
-     * @param ids 商品id列表
-     */
-    void deleteAllGoods(List<Integer> ids);
 }

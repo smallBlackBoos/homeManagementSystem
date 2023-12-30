@@ -19,18 +19,6 @@ public class OrderServiceImpl implements OrderService {
     private OrderMapper orderMapper;
 
     @Override
-    public PageBean userListOrder(Integer userId, int page, Integer pageSize) {
-        PageHelper.startPage(page, pageSize);
-
-        List<Order> orders = orderMapper.getAllUserOrder(userId);
-        Page<Order> p = (Page<Order>) orders;
-
-        PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
-
-        return pageBean;
-    }
-
-    @Override
     public PageBean getAllOrder(Integer page, Integer pageSize) {
         PageHelper.startPage(page, pageSize);
 
@@ -43,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrder(Integer id) {
+    public void removeOrder(Integer id) {
         orderMapper.deleteOrderById(id);
     }
 }

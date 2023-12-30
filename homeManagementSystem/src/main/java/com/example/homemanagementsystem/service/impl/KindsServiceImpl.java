@@ -5,6 +5,7 @@ import com.example.homemanagementsystem.mapper.KindsMapper;
 import com.example.homemanagementsystem.pojo.Goods;
 import com.example.homemanagementsystem.pojo.Kinds;
 import com.example.homemanagementsystem.pojo.PageBean;
+import com.example.homemanagementsystem.service.GoodsService;
 import com.example.homemanagementsystem.service.KindsService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -25,13 +26,7 @@ public class KindsServiceImpl implements KindsService {
     private GoodsMapper goodsMapper;
 
     @Override
-    public List<Kinds> listAll() {
-        return kindsMapper.selectAll();
-    }
-
-    @Override
     public PageBean getAllKinds(Integer page, Integer pageSize) {
-
         PageHelper.startPage(page, pageSize);
 
         List<Kinds> kindsList = kindsMapper.selectAll();
@@ -43,8 +38,18 @@ public class KindsServiceImpl implements KindsService {
     }
 
     @Override
+    public void addKinds(Kinds kinds) {
+        kindsMapper.insertKinds(kinds);
+    }
+
+    @Override
+    public void editKindsInfo(Kinds kinds) {
+        kindsMapper.updateKinds(kinds);
+    }
+
+    @Override
     @Transactional
-    public void deleteKinds(List<Integer> ids) {
+    public void removeKinds(List<Integer> ids) {
 
         // ids 商品种类id
         for(Integer id : ids) {
@@ -63,23 +68,5 @@ public class KindsServiceImpl implements KindsService {
 
         // 删除商品种类
         kindsMapper.deleteKinds(ids);
-    }
-
-    // 修改
-    @Override
-    public void updatekinds(Kinds kinds) {
-        kindsMapper.updatekinds(kinds);
-    }
-
-    // 新增
-    @Override
-    public void insertkinds(Kinds kinds) {
-        kindsMapper.insertkinds(kinds);
-    }
-
-    // 批量删除
-    @Override
-    public void deleteAllKinds(List<Integer> ids) {
-        kindsMapper.deleteAllKinds(ids);
     }
 }

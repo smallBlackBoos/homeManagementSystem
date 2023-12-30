@@ -1,7 +1,8 @@
 package com.example.homemanagementsystem.mapper;
 
 import com.example.homemanagementsystem.pojo.AdminUser;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -9,7 +10,14 @@ import java.util.List;
 public interface AdminUserMapper {
 
     /**
-     * 通过用户名和密码
+     * 查询所有管理员信息
+     * @return List<AdminUser>
+     */
+    @Select("select id, username from admin_user")
+    List<AdminUser> selectAllAdminUser();
+
+    /**
+     * 通过用户名和密码查询管理员对象
      * @param adminUser 管理员对象
      * @return 管理员对象
      */
@@ -17,48 +25,22 @@ public interface AdminUserMapper {
     AdminUser getUserByUsernameAndPassword(AdminUser adminUser);
 
     /**
-     * 查询所有用户信息
-     * @return
-     */
-    @Select("select id, username, password from admin_user")
-    List<AdminUser> getAllUser();
-
-    /**
-     * 通过id查询管理员用户信息
+     * 获取当前管理员的个人信息
      * @param id 管理员id
-     * @return 管理员对象
+     * @return Result
      */
-    @Select("select id, username, password from admin_user where id = #{id}")
-    AdminUser getUserById(Integer id);
+    @Select("select id, username from admin_user where id = #{id}")
+    AdminUser getAdminInfo(Integer id);
 
     /**
-     * 添加
-     * @param adminUser 要添加的管理员对象
-     */
-    @Insert("insert into admin_user(username, password) values (#{username}, #{password})")
-    void insertadminUser(AdminUser adminUser);
-
-    /**
-     * 修改管理员用户信息
+     * 修改个人信息
      * @param adminUser 管理员对象
      */
-    void updateUser(AdminUser adminUser);
+    void updateAdmin(AdminUser adminUser);
 
     /**
-     * 修改密码
-     * @param password 新密码
-     */
-    @Update("update admin_user set password = #{password} where id = #{id}")
-    void updatePassword(Integer id, String password);
-
-    @Delete("delete from admin_user where username = #{username}")
-    void deleteByName(String username);
-
-
-
-    /**
-     * 通过id删除管理员
-     * @param ids 管理员id列表
+     * 批量删除管理员用户
+     * @param ids 管理员id数组
      */
     void deleteAllAdminUser(List<Integer> ids);
 }

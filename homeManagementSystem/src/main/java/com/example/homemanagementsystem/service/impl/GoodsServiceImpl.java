@@ -19,6 +19,17 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsMapper goodsMapper;
 
     @Override
+    public PageBean getAllGoods(Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+
+        List<Goods> goods = goodsMapper.getAllGoods();
+        Page<Goods> p = (Page<Goods>) goods;
+
+        PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
+        return pageBean;
+    }
+
+    @Override
     public List<Goods> listByKind(Integer id) {
         return goodsMapper.getByKindsId(id);
     }
@@ -29,39 +40,17 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public PageBean getAllGoods(Integer page, Integer pageSize) {
-        PageHelper.startPage(page, pageSize);
-        List<Goods> goods = goodsMapper.getAllGoods();
-        Page<Goods> p = (Page<Goods>) goods;
-        PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
-        return pageBean;
+    public void addGoods(Goods goods) {
+        goodsMapper.insertGoods(goods);
+    }
+
+    @Override
+    public void editGoodsInfo(Goods goods) {
+        goodsMapper.updateGoods(goods);
     }
 
     @Override
     public void removeGoods(List<Integer> ids) {
         goodsMapper.deleteGoods(ids);
-    }
-
-    @Override
-    public void uploadImage(Integer id, String url) {
-        goodsMapper.updateImage(id, url);
-    }
-
-    // 修改
-    @Override
-    public void updategoods(Goods goods) {
-        goodsMapper.updategoods(goods);
-    }
-
-    // 新增
-    @Override
-    public void insertgoods(Goods goods) {
-        goodsMapper.insertgoods(goods);
-    }
-
-    // 批量删除
-    @Override
-    public void deleteAllGoods(List<Integer> ids) {
-        goodsMapper.deleteAllGoods(ids);
     }
 }

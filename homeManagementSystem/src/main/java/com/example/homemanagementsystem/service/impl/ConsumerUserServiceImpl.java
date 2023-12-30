@@ -201,9 +201,21 @@ public class ConsumerUserServiceImpl implements ConsumerUserService {
         workerMapper.updateStatus(workerId, 1);
     }
 
-    // 批量删除
+    /*
     @Override
-    public void deleteAllConsumerUser(List<Integer> ids) {
-        consumerUserMapper.deleteAllConsumerUser(ids);
+    public Integer getWorkerByStatus() {
+        // 获取所有空闲的家政人员id列表
+        List<Integer> workerIdList = workerMapper.getWorkerByStatus();
+        // 从列表中随机获取一个id
+        Integer workerId = (int) (Math.random() * workerIdList.size());
+
+        return workerId;
     }
+     */
+
+//
+//    @Override
+//    public List<Worker> browseLeisureWorker() {
+//        return consumerUserMapper.getWorkerByStatus();
+//    }
 }

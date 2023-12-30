@@ -14,6 +14,14 @@ public interface GoodsService {
     List<Goods> listByKind(Integer id);
 
     /**
+     * 分页查询所有商品信息
+     * @param page 页数
+     * @param pageSize 分页大小
+     * @return Result
+     */
+    PageBean getAllGoods(Integer page, Integer pageSize);
+
+    /**
      * 获取商品信息
      * @param id 商品id
      * @return 商品对象
@@ -21,42 +29,20 @@ public interface GoodsService {
     Goods getGoodsInfo(Integer id);
 
     /**
-     * 上传图片
-     * @param id 商品id
-     * @param url 图片url
+     * 添加商品
+     * @param goods 商品对象
      */
-    void uploadImage(Integer id, String url);
-
-    /**
-     * 分页查询所有商品信息
-     * @param page 页码
-     * @param pageSize 分页大小
-     * @return
-     */
-    PageBean getAllGoods(Integer page, Integer pageSize);
-
-    /**
-     * 删除商品
-     * @param ids 商品id
-     * @return Result
-     */
-    void removeGoods(List<Integer> ids);
+    void addGoods(Goods goods);
 
     /**
      * 修改商品信息
      * @param goods 商品对象
      */
-    void updategoods(Goods goods);
+    void editGoodsInfo(Goods goods);
 
     /**
-     * 添加
-     * @param goods 商品对象
-     */
-    void insertgoods(Goods goods);
-
-    /**
-     * 批量删除商品
+     * 删除商品
      * @param ids 商品id
      */
-    void deleteAllGoods(List<Integer> ids);
+    void removeGoods(List<Integer> ids);
 }

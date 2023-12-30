@@ -3,8 +3,10 @@ package com.example.homemanagementsystem.controller;
 import com.example.homemanagementsystem.pojo.AdminUser;
 import com.example.homemanagementsystem.pojo.ConsumerUser;
 import com.example.homemanagementsystem.pojo.Result;
+import com.example.homemanagementsystem.pojo.Worker;
 import com.example.homemanagementsystem.service.AdminUserService;
 import com.example.homemanagementsystem.service.ConsumerUserService;
+import com.example.homemanagementsystem.service.WorkerService;
 import com.example.homemanagementsystem.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +27,9 @@ public class LoginController {
     @Autowired
     private AdminUserService adminUserService;
 
+    @Autowired
+    private WorkerService workerService;
+
     /**
      * 消费者登录
      * @param consumerUser 消费者对象
@@ -41,6 +46,31 @@ public class LoginController {
             claims.put("id", user.getId());
             claims.put("username", user.getUsername());
             claims.put("identity", 1);  // 身份：1，消费者；2，家政人员；3，管理员
+
+            String jwt = JwtUtils.generateJwt(claims);  // jwt 包含当前包含的员工信息
+            return Result.success(jwt);
+        }
+
+        // 登录失败，返回错误信息
+        return Result.error("用户名或密码错误");
+    }
+
+    /**
+     * 家政人员登录
+     * @param worker 家政人员对象
+     * @return 结果
+     */
+    @PostMapping("/workerLogin")
+    public Result workerLogin(@RequestBody Worker worker) {
+        Worker user = workerService.login(worker);
+
+        // 登录成功，生成令牌，下发令牌
+        if (user != null) {
+            Map<String, Object> claims = new HashMap<>();
+
+            claims.put("id", user.getId());
+            claims.put("username", user.getUsername());
+            claims.put("identity", 2);  // 身份：1，消费者；2，家政人员；3，管理员
 
             String jwt = JwtUtils.generateJwt(claims);  // jwt 包含当前包含的员工信息
             return Result.success(jwt);

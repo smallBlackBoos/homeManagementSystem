@@ -3,6 +3,16 @@
         PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.homemanagementsystem.mapper.KindsMapper">
+    <!-- 修改商品信息 -->
+    <update id="updateKinds">
+        update kinds
+        <set>
+            <if test="name != null and name != ''">
+                kinds_id = #{kindsId}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
     <!-- 批量删除商品种类 -->
     <delete id="deleteKinds">

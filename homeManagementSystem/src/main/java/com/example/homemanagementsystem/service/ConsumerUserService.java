@@ -104,10 +104,4 @@ public interface ConsumerUserService {
      * @param orderId 订单Id
      */
     void atLeisureWorker(Integer orderId);
-
-    /**
-     * 批量删除家政人员
-     * @param ids 家政人员id
-     */
-    void deleteAllConsumerUser(List<Integer> ids);
 }

@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
  */
 public class Goods {
     private Integer id; // 服务商品ID
-    private Integer KindsId;    // 服务种类id（外键）
-    private String goodName;    // 商品名
+    private Integer kindsId;    // 服务种类id（外键）
+    private String goodsName;    // 商品名
     private double price;   // 服务价格
     private String image;   // 图片
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.homemanagementsystem.mapper.AdminUserMapper">
+
+    <!-- 修改管理员个人信息 -->
+    <update id="updateAdmin">
+        update admin_user
+        <set>
+            <if test="username != '' and username != null">
+                username = #{username}
+            </if>
+
+            <if test="password != '' and password != null">
+                password = #{password}
+            </if>
+        </set>>
+        where id = #{id};
+    </update>
+
+    <!-- 批量删除管理员 -->
+    <delete id="deleteAllAdminUser">
+        delete
+        from admin_user
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

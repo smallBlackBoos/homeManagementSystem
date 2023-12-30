@@ -7,11 +7,6 @@ import com.example.homemanagementsystem.pojo.Worker;
 import java.util.List;
 
 public interface WorkerService {
-    /**
-     * 查看所有空闲的家政人员
-     * @return 家政人员列表
-     */
-    List<Integer> browseLeisureWorker();
 
     /**
      * 登录
@@ -26,14 +21,6 @@ public interface WorkerService {
      * @return 家政人员对象
      */
     Worker getUserInfo(Integer id);
-
-    /**
-     * 分页查询所有家政人员信息
-     * @param page 页码
-     * @param pageSize 每页展示的条数
-     * @return
-     */
-    PageBean getAllWorker(Integer page, Integer pageSize);
 
     /**
      * 上传头像
@@ -65,15 +52,10 @@ public interface WorkerService {
     void removeWorker(List<Integer> ids);
 
     /**
-     * 修改个人信息
-     * @param worker 家政人员对象
-     * @return
+     * 分页查询所有家政人员信息
+     * @param page 页数
+     * @param pageSize 每页展示的数据条数
+     * @return PageBean
      */
-    void updateWorkerInfo(Worker worker);
-
-    /**
-     * 批量删除家政人员
-     * @param ids 家政人员id
-     */
-    void deleteAllWorker(List<Integer> ids);
+    PageBean getAllWorker(Integer page, Integer pageSize);
 }

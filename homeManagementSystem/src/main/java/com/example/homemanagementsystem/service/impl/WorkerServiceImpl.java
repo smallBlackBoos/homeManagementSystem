@@ -1,10 +1,7 @@
 package com.example.homemanagementsystem.service.impl;
 
 import com.example.homemanagementsystem.mapper.WorkerMapper;
-import com.example.homemanagementsystem.pojo.Order;
-import com.example.homemanagementsystem.pojo.PageBean;
-import com.example.homemanagementsystem.pojo.Result;
-import com.example.homemanagementsystem.pojo.Worker;
+import com.example.homemanagementsystem.pojo.*;
 import com.example.homemanagementsystem.service.WorkerService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -15,23 +12,13 @@ import java.util.List;
 
 @Service
 public class WorkerServiceImpl implements WorkerService {
+
     @Autowired
     private WorkerMapper workerMapper;
-
-
-    @Override
-    public List<Integer> browseLeisureWorker() {
-        return workerMapper.getWorkerByStatus();
-    }
 
     @Override
     public Worker login(Worker worker) {
         return workerMapper.getWorkerByUsernameAndPassword(worker);
-    }
-
-    @Override
-    public Worker getUserInfo(Integer id) {
-        return workerMapper.getWorkerById(id);
     }
 
     @Override
@@ -44,6 +31,11 @@ public class WorkerServiceImpl implements WorkerService {
         PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
 
         return pageBean;
+    }
+
+    @Override
+    public Worker getUserInfo(Integer id) {
+        return workerMapper.getWorkerById(id);
     }
 
     @Override
@@ -73,6 +65,8 @@ public class WorkerServiceImpl implements WorkerService {
         String username = worker.getUsername().trim();
         String password = worker.getPassword().trim();
 
+        worker.setStatus((short) 2);    // 工作状态默认为2，未启用
+
         worker.setImage("http://s5ylvlikx.hd-bkt.clouddn.com/avatar.jpg");
 
         if (username.equals("") || password.equals("")) {
@@ -93,16 +87,5 @@ public class WorkerServiceImpl implements WorkerService {
     @Override
     public void removeWorker(List<Integer> ids) {
         workerMapper.deleteById(ids);
-    }
-
-    @Override
-    public void updateWorkerInfo(Worker worker) {
-        workerMapper.updateWorker(worker);
-    }
-
-    // 批量删除
-    @Override
-    public void deleteAllWorker(List<Integer> ids) {
-        workerMapper.deleteAllWorker(ids);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.homemanagementsystem.controller;
 
 import com.example.homemanagementsystem.pojo.ConsumerUser;
+import com.example.homemanagementsystem.pojo.Kinds;
 import com.example.homemanagementsystem.pojo.PageBean;
 import com.example.homemanagementsystem.pojo.Result;
 import com.example.homemanagementsystem.service.ConsumerUserService;
@@ -143,7 +144,7 @@ public class ConsumerUserController {
      * @param password 密码
      * @param orderId 订单id
      * @param payment 支付金额
-     * @return Result
+     * @return
      */
     @PostMapping("/pay")
     public Result pay(@RequestHeader String token, String password, Integer orderId, String payment) {
@@ -156,7 +157,7 @@ public class ConsumerUserController {
         }
 
         // String --> Double
-        double money = Double.parseDouble(payment);
+        Double money = Double.valueOf(payment);
         if (money < 0) {
             return Result.error("支付金额不能为0");
         }
@@ -180,6 +181,7 @@ public class ConsumerUserController {
      * @param token 令牌
      * @param image 图片
      * @return 结果
+     * @throws IOException
      */
     @Transactional
     @PostMapping("/upload")
@@ -204,16 +206,5 @@ public class ConsumerUserController {
         }
 
         return Result.success(user);
-    }
-
-    /**
-     * 批量删除消费者用户
-     * @param ids 消费者用户id
-     * @return Result
-     */
-    @DeleteMapping("/consumerUser/deleteAllConsumerUser/{ids}")
-    public Result deleteAllAdminUser(@PathVariable List<Integer> ids) {
-        consumerUserService.deleteAllConsumerUser(ids);
-        return Result.success();
     }
 }

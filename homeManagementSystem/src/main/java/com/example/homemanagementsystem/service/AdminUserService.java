@@ -3,8 +3,8 @@ package com.example.homemanagementsystem.service;
 import com.example.homemanagementsystem.pojo.AdminUser;
 import com.example.homemanagementsystem.pojo.Goods;
 import com.example.homemanagementsystem.pojo.PageBean;
-import com.example.homemanagementsystem.pojo.Result;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface AdminUserService {
@@ -16,52 +16,44 @@ public interface AdminUserService {
     AdminUser login(AdminUser adminUser);
 
     /**
-     * 注册
-     * @param adminUser 管理员对象
+     * 分页查询所有管理员信息
+     * @param page 页数
+     * @param pageSize 每页展示的数据条数
+     * @return Result
      */
-    void register(AdminUser adminUser);
-
+    PageBean getAllAdminUser(Integer page, Integer pageSize);
 
     /**
-     * 查询管理员信息
+     * 获取当前管理员的个人信息
      * @param id 管理员id
-     * @return
+     * @return Result
      */
-    AdminUser getUserInfo(Integer id);
+    AdminUser getAdminInfo(Integer id);
+
+    /**
+     * 获取商品信息
+     * @param id 商品id
+     * @return 商品对象
+     */
+    Goods getGoodsInfo(Integer id);
 
     /**
      * 修改个人信息
      * @param adminUser 管理员对象
-     * @return
+     * @return Result
      */
-    void editUserInfo(AdminUser adminUser);
+    void editAdminUserInfo(AdminUser adminUser);
 
     /**
-     * 修改密码
-     * @param id 管理员id
-     * @param password 密码
-     * @return 结果
+     * 上传图片
+     * @param id 商品id
+     * @param url 图片url
      */
-    Result editPassword(Integer id, String password);
+    void uploadImage(Integer id, String url);
 
     /**
-     * 删除管理员
-     * @param username 用户名
-     * @return 结果
-     */
-    void deleteAdminUser(String username);
-
-    /**
-     * 批量删除管理员
-     * @param ids 管理员id
+     * 批量删除管理员用户
+     * @param ids 管理员用户id
      */
     void deleteAllAdminUser(List<Integer> ids);
-
-    /**
-     * 分页查询所有家政人员信息
-     * @param page 页码
-     * @param pageSize 每页展示的条数
-     * @return
-     */
-    PageBean getAdminUser(Integer page, Integer pageSize);
 }

@@ -4,6 +4,7 @@ import com.example.homemanagementsystem.pojo.Kinds;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -17,27 +18,21 @@ public interface KindsMapper {
     List<Kinds> selectAll();
 
     /**
+     * 添加商品种类
+     * @param kinds 商品种类对象
+     */
+    @Insert("insert into kinds(name) values (#{name})")
+    void insertKinds(Kinds kinds);
+
+    /**
+     * 修改商品种类
+     * @param kinds 商品种类对象
+     */
+    void updateKinds(Kinds kinds);
+
+    /**
      * 通过id删除商品种类
      * @param ids 商品种类id列表
      */
     void deleteKinds(List<Integer> ids);
-
-    /**
-     * 修改种类信息
-     * @param kinds 种类对象
-     */
-    void updatekinds(Kinds kinds);
-
-    /**
-     * 添加
-     * @param kinds 要添加的商品对象
-     */
-    @Insert("insert into kinds(id, name) values (#{id}, #{name})")
-    void insertkinds(Kinds kinds);
-
-    /**
-     * 通过id删除种类
-     * @param ids 商品id种类列表
-     */
-    void deleteAllKinds(List<Integer> ids);
 }
