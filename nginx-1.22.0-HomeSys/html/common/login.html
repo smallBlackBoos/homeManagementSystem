@@ -7,13 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 	
-	<link rel="stylesheet" href="../static/consumer/css/layui.css" />
-    <!-- <link rel="stylesheet" href="index.css" /> -->
+	<link rel="stylesheet" href="../static/common/css/layui.css" />
     <link rel="stylesheet" href="../static/consumer/css/index.css">
 
-	<script src="../static/consumer/js/layui.js"></script>
-    <script src="../static/consumer/js/vue.js"></script>
-    <script src="../static/consumer/js/axios.js"></script>
+	<script src="../static/common/js/layui.js"></script>
+    <script src="../static/common/js/vue.js"></script>
+    <script src="../static/common/js/axios.js"></script>
 
     <style>
         .container .box .transtion-box .role {
@@ -110,17 +109,21 @@
 					return;
 				}
 				
-				var sendUrl;
+				var sendUrl;	// 发送的路径
+				var toUrl;		// 登录成功后的跳转路径
 				if (operator == "login") {
 					switch(role) {
 						case 1:
 							sendUrl = "/consumerUserLogin";
+							toUrl = "../consumer/index.html";
 							break;
 						case 2:
 							sendUrl = "/workerLogin";
+							toUrl = "../worker/index.html";
 							break;
 						case 3:
 							sendUrl = "/adminUserLogin";
+							toUrl = "../admin/index.html";
 							break;
 					}
 				} else if (operator == "register") {
@@ -149,7 +152,7 @@
 							localStorage.setItem("token", response.data.data);
 							
 							// 跳转到家政人员的首页
-							location.href = "./index.html";
+							location.href = toUrl;
 						}
 					} else if (operator == "register") {
 						// code 0 失败 1 成功
