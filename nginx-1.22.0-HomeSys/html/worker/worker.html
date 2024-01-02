@@ -343,6 +343,8 @@
 						if (vm.userInfo.name == null || vm.userInfo.name == '' ||
 							vm.userInfo.phone == null || vm.userInfo.phone == '') {
 							vm.changeState = true;
+						} else {
+							vm.changeState = false;
 						}
 
 					}).catch(function(error) {

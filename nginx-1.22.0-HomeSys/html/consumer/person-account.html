@@ -24,7 +24,7 @@
 		<link rel="stylesheet" href="../static/consumer/css/style.css">
 		<link rel="stylesheet" href="../static/consumer/css/responsive.css">
 		<link rel="stylesheet" href="../static/consumer/css/layui.css">
-		<link rel="stylesheet" href="../static/consumer/css/element-ui.css" />
+		<link rel="stylesheet" href="../static/consumer/css/element-ui.css">
 
 		<script src="../static/consumer/js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="../static/consumer/js/jquery.js"></script>
@@ -33,16 +33,16 @@
 		<script src="../static/consumer/js/vue.js"></script>
 		<script src="../static/consumer/js/axios.js"></script>
 		<script src="../static/consumer/js/element-ui.js"></script>
-		
+
 		<script>
 			// 获取本地的token令牌
 			var data = localStorage.getItem("token");
-		
+
 			// token不存在，即还未登录
 			if (data == null) {
 				alert("请登录");
 				// 跳转到登录页面
-				location.href = "./login.html";
+				location.href = "../common/login.html";
 			}
 		</script>
 	</head>
@@ -90,8 +90,8 @@
 				</div>
 			</div>
 
-			<div class="header">
-			</div>
+			<div class="header"></div>
+
 			<div class="section-person">
 				<div class="container">
 					<div class="row">
@@ -106,13 +106,13 @@
 										<li><span class="fa fa-user-o"></span>基本信息</li>
 									</a>
 									<a href="person-account.html">
-										<li><span class="fa fa-vcard-o"></span>我的账户</li>
+										<li class="active"><span class="fa fa-vcard-o"></span>我的账户</li>
 									</a>
 									<a href="person-order.html">
 										<li><span class="fa fa-newspaper-o"></span>订单管理</li>
 									</a>
 									<a href="person-password.html">
-										<li class="active"><span class="fa fa-newspaper-o"></span>修改密码</li>
+										<li><span class="fa fa-newspaper-o"></span>修改密码</li>
 									</a>
 									<a href="person-suggest.html">
 										<li><span class="fa fa-newspaper-o"></span>投诉建议</li>
@@ -122,30 +122,52 @@
 							<div class="person-right col-md-9">
 								<div class="row">
 									<div class="person-cont">
-										<h4>修改密码</h4>
+										<h4>我的账户</h4>
 										<ul class="person-piece">
 											<li class="piece-item">
-												<span class="tit col-sm-2">原密码</span>
+												<span class="tit col-sm-2">余额</span>
 												<div class="base-input col-sm-10">
-													<input type="password" class="form-control" v-model.trim="oldPassword" />
+													<input type="text" class="form-control" readonly placeholder=""
+														:value="userInfo.money + '元'" />
 												</div>
 											</li>
 											<li class="piece-item">
-												<span class="tit col-sm-2">新密码</span>
+												<span class="tit col-sm-2">充值金额</span>
 												<div class="base-input col-sm-10">
-													<input type="password" class="form-control" v-model.trim="newPassword" />
+													<input type="text" class="form-control" placeholder=""
+														v-model="topUpMoney" />
 												</div>
 											</li>
 											<li class="piece-item">
-												<span class="tit col-sm-2">再次输入新密码</span>
-												<div class="upload base-input col-sm-10">
-													<input type="password" class="form-control" v-model.trim="confirmPassword" />
-												</div>
-											</li>
-											<li class="piece-item">
-												<div class="upload base-input col-sm-10 col-sm-offset-2">
-													<button data-method="confirmTransE"
-														class="btn btn-default alert-btn" @click="verify()">提交修改</button>
+												<span class="tit col-sm-2">充值方式</span>
+												<div class="base-input col-sm-10">
+													<template>
+														<el-radio v-model="radio" label="1">支付宝充值</el-radio>
+														<el-radio v-model="radio" label="2">微信充值</el-radio>
+													</template>
+
+													<!-- <button class="btn btn-default">充值</button> -->
+													<el-button type="button"
+														@click="dialogVisible = true">充值</el-button>
+													<el-dialog title="请输入密码" :visible.sync="dialogVisible" top="200px" width="30%"
+														:before-close="handleClose">
+
+														<el-form ref="form" :model="form" label-width="70px">
+															<el-form-item label="密码">
+																<el-input style="margin-left: -10px;" v-model.trim="form.password" show-password></el-input>
+															</el-form-item>
+																
+															<el-form-item label="确认密码">
+																<el-input style="margin-left: -10px;" v-model.trim="form.confirmPassword" show-password></el-input>
+															</el-form-item>
+														</el-form>
+														
+														<span slot="footer" class="dialog-footer">
+															<el-button @click="dialogVisible = false">取 消</el-button>
+															<el-button type="primary" @click="verify()">确
+																定</el-button>
+														</span>
+													</el-dialog>
 												</div>
 											</li>
 										</ul>
@@ -206,6 +228,7 @@
 				});
 			});
 		</script>
+
 		<script>
 			var vm = new Vue({
 				el: "#app",
@@ -221,9 +244,13 @@
 						sex: '',
 						username: ''
 					},
-					oldPassword: '',
-					newPassword: '',
-					confirmPassword: ''
+					radio: "1",
+					form: {
+						password: '',
+						confirmPassword: ''
+					},
+					dialogVisible: false,
+					topUpMoney: 0,
 				},
 				methods: {
 					handleClose(done) {
@@ -234,17 +261,15 @@
 							.catch(_ => {});
 					},
 					verify() {
-						let oldPassword = this.oldPassword.trim();
-						let newPassword = this.newPassword.trim()
-						let confirmPassword = this.confirmPassword.trim();
+						let password = this.form.password.trim();
+						let confirmPassword = this.form.confirmPassword.trim();
 						
-						if (oldPassword == null || oldPassword == '' || newPassword == null || newPassword == '' || 
-							confirmPassword == null || confirmPassword == '') {
-							layer.msg("请完整填写密码", {
+						if (password == null || password == '' || confirmPassword == null || confirmPassword == '') {
+							layer.msg("请填写密码和确认密码", {
 								time: 1200
 							});
 							return;
-						} else if (newPassword !== confirmPassword) {
+						} else if (password !== confirmPassword) {
 							layer.msg("两次输入的密码不一致", {
 								time: 1200
 							});
@@ -253,12 +278,12 @@
 						
 						// 准备要传递的数据
 						let myParams = new URLSearchParams();
-						myParams.append('oldPassword', oldPassword);
-						myParams.append("newPassword", newPassword);
+						myParams.append('password', password);
+						myParams.append("topUpMoney", this.topUpMoney);
 						
 						// 发送数据
 						axios
-						.put("http://127.0.0.1:8080/consumerUser/editPassword",
+						.put("http://127.0.0.1:8080/consumerUser/topUp",
 							myParams,
 							{
 								headers: {
@@ -266,19 +291,20 @@
 								},
 						}).then(function(response) {
 							
-							if (response.data.code == 0) {	// 修改失败
+							if (response.data.code == 0) {	// 充值失败
 								layer.msg(response.data.msg);
-							} else if (response.data.code == 1) { // 修改成功
-								// vm.userInfo = response.data.data;	// 更新数据
+							} else if (response.data.code == 1) { // 充值成功
+								vm.userInfo = response.data.data;	// 更新数据
 								
 								// 清空输入数据
-								vm.oldPassword = '';
-								vm.newPassword = '';
-								vm.confirmPassword = '';
+								vm.topUpMoney = 0;
+								vm.form.password = '';
+								vm.form.confirmPassword = '';
 								
-								layer.msg("修改成功");
+								layer.msg("充值成功");
 							}
 							
+							vm.dialogVisible = false;	// 关闭弹窗
 						}).catch(function(error) {
 							console.log(error); // 提示用户失败信息
 						});
@@ -291,13 +317,13 @@
 							'token': data
 						},
 					}).then(function(response) {
-		
+
 						if (response.data.code == 0) {	// 获取失败
 							if (response.data.msg == 'NOT_LOGIN') {	// 登录信息过期
 								layer.msg("登录信息过期，请重新登录",{
 									time: 1200
 								}, function (res) {
-									location.href = './login.html';	// 跳转到登录页面
+									location.href = '../common/login.html';	// 跳转到登录页面
 								});
 								
 								return;
@@ -306,16 +332,15 @@
 							layer.msg(response.data.msg);
 							return;
 						}
-		
+
 						vm.userInfo = response.data.data;
-		
+
 					}).catch(function(error) {
 						console.log(error); // 提示用户失败信息
 					});
 				}
 			})
 		</script>
-
 	</body>
 
 </html>

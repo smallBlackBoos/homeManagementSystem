@@ -117,6 +117,7 @@
 			var vm = new Vue({
 				el: "#app",
 				data: {
+					username: '',
 					money: 0,					// 余额
 					cashWithdrawalAmount: '',	// 提现金额
 					withdrawalMethod: 1,		// 提现方式（默认支付宝提现）
@@ -207,6 +208,7 @@
 								layer.msg("提现成功");
 							}
 							
+							// 重新获取用户的金额
 							vm.getUserMoney();
 							vm.dialogVisible = false;	// 关闭弹窗
 						}).catch(function(error) {
@@ -243,6 +245,8 @@
 							
 							if (vm.money == 0) {
 								vm.cashWith = true;
+							} else {
+								vm.cashWith = false;
 							}
 						}).catch(function(error) {
 							console.log(error); // 提示用户失败信息

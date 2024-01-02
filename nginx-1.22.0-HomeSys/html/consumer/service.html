@@ -11,7 +11,6 @@
 		<link rel="apple-touch-icon" href="apple-touch-icon.png">
 		<!-- Place favicon.ico in the root directory -->
 
-
 		<!-- all css -->
 		<link rel="stylesheet" href="../static/consumer/css/zui.min.css">
 		<link rel="stylesheet" href="../static/consumer/css/bootstrap.min.css">
@@ -28,17 +27,12 @@
 		<link rel="stylesheet" href="../static/consumer/css/bundle.css">
 		<link rel="stylesheet" href="../static/consumer/css/style.css">
 		<link rel="stylesheet" href="../static/consumer/css/responsive.css">
-		<link rel="stylesheet" href="../static/consumer/css/service.css">
-		<link rel="stylesheet" href="../static/consumer/css/layui.css">
-		<link rel="stylesheet" href="../static/consumer/css/element-ui.css">
 
 		<script src="../static/consumer/js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="../static/consumer/js/jquery.js"></script>
 		<script src="../static/consumer/js/zui.min.js"></script>
 		<script src="../static/consumer/js/vue.js"></script>
 		<script src="../static/consumer/js/axios.js"></script>
-		<script src="../static/consumer/js/layui.js"></script>
-		<script src="../static/consumer/js/element-ui.js"></script>
 	</head>
 
 	<body>
@@ -93,9 +87,9 @@
 								<div class="main-menu">
 									<nav>
 										<ul>
-											<li><a href="index.html">首页</a>
+											<li class="active"><a href="index.html">首页</a>
 											</li>
-											<li class="active"><a href="service.html">家政服务</a>
+											<li><a href="service.html">家政服务</a>
 												<ul class="sub-menu">
 													<li><a href="service-daily.html">日常保洁</a></li>
 													<li><a href="service-clean.html">家电清洗</a></li>
@@ -122,15 +116,15 @@
 			<!-- header-top-area-start -->
 			<!-- breadcrumb-banner-area -->
 			<div class="breadcrumb-banner-area ptb-120 bg-opacity"
-				style="background-image:url(../static/consumer/img/bg/6.jpg)">
+				style="background-image:url(../static/consumer/img/slider/3.png)">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="breadcrumb-text text-center">
-								<h2>家电清洗</h2>
+								<h2>净美环境 愉悦生活</h2>
 								<ul class="breadcrumb-menu">
-									<li><a href="#">Appliance</a></li>
-									<li><a href="#">cleaning</a></li>
+									<li><a href="#">Service</a></li>
+									<li><a href="#">about us</a></li>
 								</ul>
 							</div>
 						</div>
@@ -138,70 +132,109 @@
 				</div>
 			</div>
 			<!-- breadcrumb-banner-area-end -->
-			<div>
-				<!-- 服务项目 开始 -->
-				<div class="SelectCont JDQXPage">
-					<div class="Item Item1">
-						<div class="title"><span>服务项目<b></b></span></div>
-						<div class="infotxt">
-							<div class="itmeimgs">
-								<img src="./../static/consumer/img/clean/services1.jpg" />
-								<img src="./../static/consumer/img/clean/services2.jpg" />
-								<img src="./../static/consumer/img/clean/services3.jpg" />
-								<img src="./../static/consumer/img/clean/services4.jpg" />
-							</div>
-						</div>
-						<i class="bot_icon"></i>
+			<!-- Our-Services-area-start -->
+			<div class="Our-Services-area pt-120 pb-65">
+				<div class="container">
+					<div class="section-info text-center mb-60">
+						<h2>Our-Services</h2>
+						<p>相信我们，开启品质生活。 </p>
 					</div>
-
-
-
-					<div class="Item Item3">
-						<div class="title"><span>服务流程<b></b></span></div>
-						<div class="infotxt">
-							<img src="./../static/consumer/img/clean/process.jpg" />
-							<div class="clear"></div>
-						</div>
-						<i class="bot_icon"></i>
-					</div>
-
-
-
-					<div class="Item BJStyle">
-					</div>
-				</div>
-
-				<!-- 服务项目 结束 -->
-
-				<!-- pricing-area-start -->
-				<div class="pricing-area pb-90">
-					<div class="container">
-						<div class="section-info text-center mb-60">
-							<h2>优惠套餐</h2>
-						</div>
-						<!-- 热水器 -->
-						<div class="row">
-							<!-- 服务展示 -->
-							<div class="col-md-4 col-sm-6" v-for="goods in goodsInfo">
-								<div class="pricing-wrapper text-center mb-30">
-									<div class="pricing-top">
-										<h3>{{ goods.goodName }}</h3>
+					<div class="row">
+						<!-- 日常保洁 -->
+						<div class="col-md-4 col-sm-6">
+							<a href="service-daily.html">
+								<div class="our-services-wrapper text-center mb-50">
+									<div class="our-services-icon">
+										<img src="./../static/consumer/img/detalis/01.png" alt="">
+										<!-- <i class="flaticon-paint-roller"></i> -->
 									</div>
-									<div class="pricing-bottom">
-										<span>{{ goods.price }}￥</span>
-									</div>
-									<ul class="pricing-menu">
-									</ul>
-									<div class="pricing-btn">
-										<a href="javascript:;" @click="buy(goods.id)">订购</a>
+									<div class="our-services-text">
+										<h3><a href="service-daily.html">日常保洁</a></h3>
+										<p>新居开荒保洁/全屋大扫除/精致擦玻璃/全屋深度清洁</p>
 									</div>
 								</div>
-							</div>
+							</a>
 						</div>
+						<!-- 家电清洗 -->
+						<div class="col-md-4 col-sm-6">
+							<a href="service-clean.html">
+								<div class="our-services-wrapper text-center mb-50">
+									<div class="our-services-icon">
+										<img src="./../static/consumer/img/detalis/04.png" alt="">
+										<!-- <i class="flaticon-pipe-icon"></i> -->
+									</div>
+									<div class="our-services-text">
+										<h3><a href="service-clean.html">家电清洗</a></h3>
+										<p>热水器清洗/洗衣机清洗/冰箱清洗/油烟机清洗/空调清洗</p>
+									</div>
+								</div>
+							</a>
+						</div>
+						<!-- 收纳整理 -->
+						<div class="col-md-4 col-sm-6">
+							<a href="service-arrange.html">
+								<div class="our-services-wrapper text-center mb-50">
+									<div class="our-services-icon">
+										<img src="./../static/consumer/img/detalis/04.png" alt="">
+										<!-- <i class="flaticon-pipe-icon"></i> -->
+									</div>
+									<div class="our-services-text">
+										<h3><a href="service-arrange.html">收纳整理</a></h3>
+										<p>专业收纳整理</p>
+									</div>
+								</div>
+							</a>
+						</div>
+						<!-- 家具养护 -->
+						<div class="col-md-4 col-sm-6">
+							<a href="service-furniture.html">
+								<div class="our-services-wrapper text-center mb-50">
+									<div class="our-services-icon">
+										<img src="./../static/consumer/img/detalis/04.png" alt="">
+										<!-- <i class="flaticon-pipe-icon"></i> -->
+									</div>
+									<div class="our-services-text">
+										<h3><a href="service-furniture.html">家具养护</a></h3>
+										<p>地毯清洗/床垫清洗/沙发清洗/窗帘清洗</p>
+									</div>
+								</div>
+							</a>
+						</div>
+						<!-- 管道疏通 -->
+						<div class="col-md-4 col-sm-6">
+							<a href="service-pipe.html">
+								<div class="our-services-wrapper text-center mb-50">
+									<div class="our-services-icon">
+										<img src="./../static/consumer/img/detalis/04.png" alt="">
+										<!-- <i class="flaticon-pipe-icon"></i> -->
+									</div>
+									<div class="our-services-text">
+										<h3><a href="service-pipe.html	">管道疏通</a></h3>
+										<p>马桶疏通/洗菜鹏疏通/地漏疏通/浴缸疏通/洗手盆疏通</p>
+									</div>
+								</div>
+							</a>
+						</div>
+						<!-- 木地板打蜡 -->
+						<div class="col-md-4 col-sm-6">
+							<a href="service-Floor.html">
+								<div class="our-services-wrapper text-center mb-50">
+									<div class="our-services-icon">
+										<img src="./../static/consumer/img/detalis/04.png" alt="">
+										<!-- <i class="flaticon-pipe-icon"></i> -->
+									</div>
+									<div class="our-services-text">
+										<h3><a href="service-Floor.html">木地板打蜡</a></h3>
+										<p>木地板打蜡</p>
+									</div>
+								</div>
+							</a>
+						</div>
+
 					</div>
 				</div>
 			</div>
-			<!-- pricing-area-end -->
+			<!-- Our-Services-area-start -->
 			<footer>
 				<!-- footer-top-area-start -->
 				<div class="footer-top-area footer-top pt-100 bg-opacity pb-70"
@@ -256,7 +289,7 @@
 				<!-- footer-top-area-end -->
 			</footer>
 		</div>
-
+		
 		<!-- all js here -->
 		<script src="../static/consumer/js/vendor/jquery-1.12.0.min.js"></script>
 		<script src="../static/consumer/js/bootstrap.min.js"></script>
@@ -273,70 +306,36 @@
 		<script src="../static/consumer/js/ajax-mail.js"></script>
 		<script src="../static/consumer/js/plugins.js"></script>
 		<script src="../static/consumer/js/main.js"></script>
-	</body>
 
-	<script>
-		var vm = new Vue({
-			el: "#app",
-			data: {
-				goodsInfo: [{
-					id: '',
-					goodName: '',
-					price: '',
-				}],
-			},
-			methods: {
-				buy(goodsId) {
-					// 获取本地的token令牌
-					var data = localStorage.getItem("token");
-
-					// token不存在，即还未登录
-					if (data == null) {
-						alert("请登录");
-						// 跳转到登录页面
-						location.href = "./login.html";
-						return;
-					}
-
-					// 准备要传递的数据
-					let myParams = new URLSearchParams();
-					myParams.append('goodsId', goodsId);
-
+		<script>
+			var vm = new Vue({
+				el: "#app",
+				data: {
+					kindsInfo: [{
+						name: ''
+					}],
+				},
+				mounted() {
 					axios
-						.post("http://127.0.0.1:8080/consumerUser/consumerBuy",
-							myParams, {
-								headers: {
-									'token': data
-								},
-							}).then(function(response) {
-
-							if (response.data.code == 0) { // 订购失败
-								layer.msg(response.data.msg);
-							} else if (response.data.code == 1) { // 订购成功
-								layer.msg("订购成功，待支付", {
-									time: 1200
-								}, function(res) {
-									location.href = "./person-order.html";
-								});
-							}
-
-						}).catch(function(error) {
-							console.log(error); // 提示用户失败信息
-						});
-				}
-			},
-			mounted() {
-				axios
-					.get("http://127.0.0.1:8080/goods/2")
+					.get("http://127.0.0.1:8080/kinds/listAll")
 					.then(function(response) {
-
-						vm.goodsInfo = response.data.data;
-
+						
+						if (response.data.code == 0) {	// 获取失败
+							layer.msg(response.data.msg);
+							return;
+						}
+		
+						vm.kindsInfo = response.data.data;
+						
+						console.log(vm.kindsInfo);
+		
 					}).catch(function(error) {
 						console.log(error); // 提示用户失败信息
+						layer.msg(error);
 					});
-			}
-		})
-	</script>
+				}
+			})
+		</script>
+	</body>
 
 </html>
