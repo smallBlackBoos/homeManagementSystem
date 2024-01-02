@@ -1,0 +1,535 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>家政平台-个人中心</title>
+
+
+		<!-- all css -->
+		<link rel="stylesheet" href="../static/consumer/css/zui.min.css">
+		<link rel="stylesheet" href="../static/consumer/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../static/consumer/css/magnific-popup.css">
+		<link rel="stylesheet" href="../static/consumer/css/owl.carousel.min.css">
+		<link rel="stylesheet" href="../static/consumer/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../static/consumer/css/flaticon.css">
+		<link rel="stylesheet" href="../static/consumer/css/ionicons.min.css">
+		<link rel="stylesheet" href="../static/consumer/css/headline.css">
+		<link rel="stylesheet" href="../static/consumer/css/animate.min.css">
+		<link rel="stylesheet" href="../static/consumer/css/material-design-iconic-font.min.css">
+		<link rel="stylesheet" href="../static/consumer/css/meanmenu.css">
+		<link rel="stylesheet" href="../static/consumer/css/Pe-icon-7-stroke.css">
+		<link rel="stylesheet" href="../static/consumer/css/bundle.css">
+		<link rel="stylesheet" href="../static/consumer/css/style.css">
+		<link rel="stylesheet" href="../static/consumer/css/responsive.css">
+		<link rel="stylesheet" href="../static/consumer/css/layui.css">
+		<link rel="stylesheet" href="../static/consumer/css/element-ui.css" />
+
+		<script src="../static/consumer/js/vendor/modernizr-2.8.3.min.js"></script>
+		<script src="../static/consumer/js/jquery.js"></script>
+		<script src="../static/consumer/js/zui.min.js"></script>
+		<script src="../static/consumer/js/layui.js"></script>
+		<script src="../static/consumer/js/vue.js"></script>
+		<script src="../static/consumer/js/axios.js"></script>
+		<script src="../static/consumer/js/element-ui.js"></script>
+
+		<script>
+			// 获取本地的token令牌
+			var data = localStorage.getItem("token");
+
+			// token不存在，即还未登录
+			if (data == null) {
+				alert("请登录");
+				// 跳转到登录页面
+				location.href = "./login.html";
+			}
+		</script>
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="header-top-area blue-bg">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-3 col-md-3 col-sm-3 site-branding col-xs-12">
+							<div class="header-logo">
+								<a href="index.html"><img src="../static/consumer/img/logo/1.png" alt="" /></a>
+							</div>
+						</div>
+						<div class="col-lg-5 col-md-6 col-sm-9 hidden-xs">
+							<div class="header-left">
+								<div class="header-text">
+									<div class="header-icon">
+										<i class="fa fa-phone"></i>
+										<i class="paint-roller"></i>
+									</div>
+									<div class="header-info">
+										<span class="phone">+00-1202-235</span>
+										<span class="gmail">hmend@gmail.com</span>
+									</div>
+								</div>
+								<div class="header-text">
+									<div class="header-icon">
+										<i class="fa fa-home"></i>
+									</div>
+									<div class="header-info">
+										<span class="phone">福州大学至诚学院</span>
+										<span class="gmail">福州市，鼓楼区</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4 col-md-3 hidden-sm col-xs-12">
+							<div class="header-left-icon">
+								<a href="#"><i class="icon icon-user icon-2x"> 个人中心</i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="header">
+			</div>
+			<div class="section-person">
+				<div class="container">
+					<div class="row">
+						<div class="person-wrap">
+							<div class="person-left col-md-3">
+								<div class="person-head">
+									<img :src="userInfo.image" class="thumbnail" />
+									<div class="real-name">用户名</div>
+								</div>
+								<ul class="person-tab">
+									<a href="person.html">
+										<li><span class="fa fa-user-o"></span>基本信息</li>
+									</a>
+									<a href="person-account.html">
+										<li><span class="fa fa-vcard-o"></span>我的账户</li>
+									</a>
+									<a href="person-order.html">
+										<li class="active"><span class="fa fa-newspaper-o"></span>订单管理</li>
+									</a>
+									<a href="person-password.html">
+										<li><span class="fa fa-newspaper-o"></span>修改密码</li>
+									</a>
+									<a href="person-suggest.html">
+										<li><span class="fa fa-newspaper-o"></span>投诉建议</li>
+									</a>
+								</ul>
+							</div>
+							<div class="person-right col-md-9">
+								<div class="row">
+									<div class="person-cont">
+										<h4>
+											<span class="active">全部订单</span>
+										</h4>
+										<div class="order-wrap">
+											<div class="order-tab" v-for="(row, index) in orderInfo.rows">
+												<ul class="order-list">
+													<li class="order-item col-sm-6 ">
+														<span class="tit">雇员姓名：</span>
+														<span
+															class="cont">{{ row.workerName == null ? '待分配' : row.workerName }}</span>
+													</li>
+													<li class="order-item col-sm-6 ">
+														<span class="tit">服务类型：</span>
+														<span class="cont">{{ row.kindsName }}</span>
+													</li>
+													<li class="order-item col-sm-6 ">
+														<span class="tit">服务描述：</span>
+														<span class="cont">{{ row.goodsName }}</span>
+													</li>
+													<li class="order-item col-sm-6 ">
+														<span class="tit">总价（元）：</span>
+														<span class="cont">{{ row.goodsPrice }}</span>
+													</li>
+													<li class="order-item col-sm-6 ">
+														<span class="tit">开始服务时间：</span>
+														<span class="cont">{{ row.createTime }}</span>
+													</li>
+													<li class="order-item col-sm-6 ">
+														<span class="tit">订单状态：</span>
+														<span class="cont">{{ row.status }}</span>
+													</li>
+													<li class="order-item col-sm-6 clear-bottom-border"
+														v-if="row.status == '待支付'">
+														<span class="tit">订单操作：</span>
+														<span class="cont">
+															<el-button type="danger"
+																@click="confirmTheOrder(row)">订单支付</el-button>
+														</span>
+													</li>
+												</ul>
+											</div>
+
+											<template>
+												<div class="block" style="margin-left: 150px;">
+													<el-pagination @size-change="handleSizeChange" background
+														@current-change="handleCurrentChange"
+														:current-page="currentPage" :page-size="2"
+														layout="total, prev, pager, next, jumper"
+														:total="orderInfo.total">
+													</el-pagination>
+												</div>
+											</template>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<el-dialog title="确认订单" :visible.sync="dialogVisible" top="200px" width="30%" :before-close="handleClose">
+				<el-form ref="form" :model="form" label-width="70px">
+					<el-form-item label="服务名">
+						<el-input placeholder="请输入内容" v-model="order.goodsName" :disabled="true"></el-input>
+					</el-form-item>
+
+					<el-form-item label="价格">
+						<el-input placeholder="请输入内容" v-model="order.goodsPrice" :disabled="true"></el-input>
+					</el-form-item>
+
+					<el-form-item label="密码">
+						<el-input style="margin-left: 0px;" v-model.trim="form.password" show-password></el-input>
+					</el-form-item>
+
+					<el-form-item label="确认密码">
+						<el-input style="margin-left: 0px;" v-model.trim="form.confirmPassword"
+							show-password></el-input>
+					</el-form-item>
+				</el-form>
+
+				<span slot="footer" class="dialog-footer">
+					<el-button @click="dialogVisible = false">取 消</el-button>
+					<el-button type="primary" @click="verify()">确
+						定</el-button>
+				</span>
+			</el-dialog>
+		</div>
+
+		<script>
+			$(".tab-li").hide().first().show();
+			$(".search-input li").hide().first().show();
+			$(".person-cont").hide().first().show();
+			$(".order-tab").hide().first().show();
+			$(document).ready(function(e) {
+				$(".nav-more").click(function() {
+					$(".hide-nav").slideToggle();
+				});
+				$(".drop-menu").click(function() {
+					$(".header-nav").slideToggle();
+				});
+				$(".three li").click(function() {
+					$(this).addClass("current").siblings().removeClass("current");
+					$(".search-input li").hide().eq($(this).index()).show();
+				});
+				$(".person-tab li").click(function() {
+					$(this).addClass("active").siblings().removeClass("active");
+					$(".person-cont").hide().eq($(this).index()).show();
+				});
+				$(".base-radio .choose-radio").click(function() {
+					$(".tab-li").hide().eq($(this).index()).show();
+				});
+				$(".person-cont h4 span").click(function() {
+					$(this).addClass("active").siblings().removeClass("active");
+					$(".order-tab").hide().eq($(this).index()).show();
+				});
+				//返回顶部
+				$(".top-item").click(function() {
+					$('body,html').animate({
+						scrollTop: 0
+					}, 500);
+					return false;
+				});
+				$(".change-btn").click(function() {
+					$(".modal").fadeIn();
+					$(".public-dom").fadeIn();
+				});
+				$(".close,.layui-layer-btn a").click(function() {
+					$(".modal").fadeOut();
+					$(".layui-layer").fadeOut();
+					$(".public-dom").fadeOut();
+				});
+				$(".delete-btn").click(function() {
+					$(".layui-layer").fadeIn();
+				});
+			});
+		</script>
+
+		<script>
+			var vm = new Vue({
+				el: "#app",
+				data: {
+					userInfo: {
+						address: '',
+						email: '',
+						image: '',
+						money: 0,
+						name: '',
+						password: '',
+						phone: '',
+						sex: '',
+						username: ''
+					},
+					orderInfo: {
+						rows: [{
+							id: 0,
+							name: '',
+							workerId: 0,
+							workerName: null,
+							kindsId: 0,
+							kindsName: '',
+							goodsPrice: 0,
+							goodsName: '',
+							status: "待支付",
+							createTime: '',
+						}],
+						total: 0,
+					},
+					dialogVisible: false,
+					order: {
+						id: 0,
+						name: '',
+						workerId: 0,
+						workerName: null,
+						kindsId: 0,
+						kindsName: '',
+						goodsPrice: 0,
+						goodsName: '',
+						status: 0,
+						createTime: ''
+					},
+					form: {
+						goodsPrice: '',
+						password: '',
+						confirmPassword: ''
+					},
+					currentPage: 1
+				},
+				methods: {
+					handleClose(done) {
+						this.$confirm('确认关闭？')
+							.then(_ => {
+								done();
+							})
+							.catch(_ => {});
+					},
+					confirmTheOrder(order) {
+						this.order = order;
+						this.dialogVisible = true; // 打开面板
+					},
+					verify() {
+						let password = this.form.password.trim();
+						let confirmPassword = this.form.confirmPassword.trim();
+
+						if (password == null || password == '' || confirmPassword == null || confirmPassword == '') {
+							layer.msg("请填写密码和确认密码", {
+								time: 1200
+							});
+							return;
+						} else if (password !== confirmPassword) {
+							layer.msg("两次输入的密码不一致", {
+								time: 1200
+							});
+							return;
+						}
+
+						// 准备要传递的数据
+						let myParams = new URLSearchParams();
+						myParams.append('password', password);
+						myParams.append("orderId", this.order.id);
+						myParams.append("payment", this.order.goodsPrice);
+
+						// 发送数据
+						axios
+							.post("http://127.0.0.1:8080/consumerUser/pay",
+								myParams, {
+									headers: {
+										'token': data
+									},
+								}).then(function(response) {
+
+								if (response.data.code == 0) { // 支付失败
+									layer.msg(response.data.msg);
+								} else if (response.data.code == 1) { // 支付成功
+									vm.orderInfo = response.data.data; // 更新数据
+
+									// 清空输入数据
+									vm.form.password = '';
+									vm.form.confirmPassword = '';
+
+
+									(vm.orderInfo.rows).forEach((item, index) => {
+										// 修改时间格式
+										item.createTime = (item.createTime).replace("T", " ");
+										// 修改订单状态
+										switch (item.status) {
+											case 0:
+												item.status = "待支付"
+												break;
+											case 1:
+												item.status = "已支付，等待服务人员上门"
+												break;
+											case 2:
+												item.status = "已完成"
+												break;
+										}
+									});
+
+									layer.msg("支付成功");
+								}
+
+								vm.dialogVisible = false; // 关闭弹窗
+							}).catch(function(error) {
+								console.log(error); // 提示用户失败信息
+							});
+					},
+					handleSizeChange(val) {
+						console.log(`每页 ${val} 条`);
+					},
+					handleCurrentChange(val) {
+						console.log(`当前页: ${val}`);
+
+						this.getInfo(val);
+					},
+					getInfo(val) {
+						// 获取订单信息
+						axios
+							.get("http://127.0.0.1:8080/consumerUser/getConsumerUserOrder?page=" + val, {
+								headers: {
+									'token': data
+								},
+							}).then(function(response) {
+
+								if (response.data.code == 0) { // 获取失败
+									if (response.data.msg == 'NOT_LOGIN') { // 登录信息过期
+										layer.msg("登录信息过期，请重新登录", {
+											time: 1200
+										}, function(res) {
+											location.href = './login.html'; // 跳转到登录页面
+										});
+
+										return;
+									}
+
+									layer.msg(response.data.msg);
+									return;
+								}
+
+								vm.orderInfo = response.data.data; // 更新数据
+
+								// 修改时间格式
+								(vm.orderInfo.rows).forEach((item, index) => {
+									item.createTime = (item.createTime).replace("T", " ");
+									// 修改订单状态
+									switch (item.status) {
+										case 0:
+											item.status = "待支付"
+											break;
+										case 1:
+											item.status = "已支付，等待服务人员上门"
+											break;
+										case 2:
+											item.status = "已完成"
+											break;
+									}
+								});
+								
+								console.log(vm.orderInfo);
+
+							}).catch(function(error) {
+								console.log(error); // 提示用户失败信息
+							});
+					}
+				},
+				mounted() {
+					// 获取用户信息
+					axios
+						.get("http://127.0.0.1:8080/consumerUser/getUserInfo", {
+							headers: {
+								'token': data
+							},
+						}).then(function(response) {
+
+							if (response.data.code == 0) { // 获取失败
+								if (response.data.msg == 'NOT_LOGIN') { // 登录信息过期
+									layer.msg("登录信息过期，请重新登录", {
+										time: 1200
+									}, function(res) {
+										location.href = './login.html'; // 跳转到登录页面
+									});
+
+									return;
+								}
+
+								layer.msg(response.data.msg);
+								return;
+							}
+
+							vm.userInfo = response.data.data;
+
+						}).catch(function(error) {
+							console.log(error); // 提示用户失败信息
+						});
+
+					this.getInfo(1);
+					// // 获取订单信息
+					// axios
+					// 	.get("http://127.0.0.1:8080/consumerUser/getConsumerUserOrder", {
+					// 		headers: {
+					// 			'token': data
+					// 		},
+					// 	}).then(function(response) {
+
+					// 		if (response.data.code == 0) { // 获取失败
+					// 			if (response.data.msg == 'NOT_LOGIN') { // 登录信息过期
+					// 				layer.msg("登录信息过期，请重新登录", {
+					// 					time: 1200
+					// 				}, function(res) {
+					// 					location.href = './login.html'; // 跳转到登录页面
+					// 				});
+
+					// 				return;
+					// 			}
+
+					// 			layer.msg(response.data.msg);
+					// 			return;
+					// 		}
+
+					// 		vm.orderInfo = response.data.data; // 更新数据
+
+					// 		(vm.orderInfo.rows).forEach((item, index) => {
+					// 			// 修改时间格式
+					// 			item.createTime = (item.createTime).replace("T", " ");
+					// 			// 修改订单状态
+					// 			switch (item.status) {
+					// 				case 0:
+					// 					item.status = "待支付"
+					// 					break;
+					// 				case 1:
+					// 					item.status = "已支付，等待服务人员上门"
+					// 					break;
+					// 				case 2:
+					// 					item.status = "已完成"
+					// 					break;
+					// 			}
+					// 		});
+							
+					// 		// console.log(vm.orderInfo);
+
+					// 	}).catch(function(error) {
+					// 		console.log(error); // 提示用户失败信息
+					// 	});
+
+				}
+			})
+		</script>
+
+	</body>
+
+</html>
