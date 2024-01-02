@@ -1,57 +1,259 @@
 <!DOCTYPE html>
 <html class="x-admin-sm">
-    <head>
-        <meta charset="UTF-8">
-        <title>家政系统-服务人员界面</title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-        <link rel="stylesheet" href="../static/worker/css/font.css">
-        <link rel="stylesheet" href="../static/worker/css/xadmin.css">
-        <link rel="stylesheet" href="../static/worker/lib/layui/css/layui.css">
-        <script src="../static/worker/js/jquery.min.js"></script>
-        <script src="../static/worker/lib/layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="../static/worker/js/xadmin.js"></script>
-        <script type="text/javascript" src="../static/worker/js/user.js"></script>     
-    </head>
-    <body>
-        <div class="layui-col-md12">
-            <div class="layui-card">
-                <div class="layui-card-header">提现</div>
-                <div class="layui-card-body ">
-                        <ul class="person-piece">
-                            <li class="piece-item">
-                                <span class="tit col-sm-2">余额</span>
-                                <div class="base-input col-sm-10">
-                                    <input type="text" class="form-control" readonly placeholder="" value="0.0元" />
-                                </div>
-                            </li>
-                            <li class="piece-item">
-                                <span class="tit col-sm-2">提现</span>
-                                <div class="base-input col-sm-10">
-                                    <input type="text" class="form-control" readonly placeholder="" value="0.0元" />
-                                </div>
-                            </li>
-                            <li class="piece-item">
-                                <span class="tit col-sm-2">提现金额</span>
-                                <div class="base-input col-sm-10">
-                                    <input type="text" class="form-control" placeholder="" value="100" />
-                                </div>
-                            </li>
-                            <li class="piece-item">
-                                <span class="tit col-sm-2">提现方式</span>
-                                <div class="base-input col-sm-10">
-                                    <input type="radio" name="pay" value="1" />
-                                    <label for="1">支付宝提现</label>
-                                    <input type="radio" name="pay" value="2" />
-                                    <label for="2">微信提现</label><br/>
-                                    <button  class="layui-btn" >提现</button>
-                                </div>
-                            </li>
-                        </ul>
-                    
-                </div>
-            </div>
-        </div>
-    </body>
+	<head>
+		<meta charset="UTF-8">
+		<title>家政系统-服务人员界面</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport"
+			content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+		<link rel="stylesheet" href="../static/worker/css/font.css">
+		<link rel="stylesheet" href="../static/worker/css/xadmin.css">
+		<link rel="stylesheet" href="../static/worker/lib/layui/css/layui.css">
+		<link rel="stylesheet" href="../static/common/css/element-ui.css">
+
+		<script src="../static/admin/lib/layui/layui.js" charset="utf-8"></script>
+		<script src="../static/admin/js/xadmin.js"></script>
+		<script src="../static/common/js/vue.js"></script>
+		<script src="../static/common/js/axios.js"></script>
+		<script src="../static/common/js/element-ui.js"></script>
+		
+		<script>
+			// 获取本地的token令牌
+			var data = localStorage.getItem("token");
+		
+			// token不存在，即还未登录
+			if (data == null) {
+				alert("请登录");
+				// 跳转到登录页面
+				location.href = "../common/login.html";
+			}
+		</script>
+	</head>
+	<body>
+		<div id="app">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header">提现</div>
+					<div class="layui-card-body ">
+						<!-- <ul class="person-piece">
+							<li class="piece-item">
+								<span class="tit col-sm-2">余额</span>
+								<div class="base-input col-sm-10">
+									<input type="text" class="form-control" readonly placeholder="" value="0.0元" />
+								</div>
+							</li>
+							<li class="piece-item">
+								<span class="tit col-sm-2">提现</span>
+								<div class="base-input col-sm-10">
+									<input type="text" class="form-control" readonly placeholder="" value="0.0元" />
+								</div>
+							</li>
+							<li class="piece-item">
+								<span class="tit col-sm-2">提现金额</span>
+								<div class="base-input col-sm-10">
+									<input type="text" class="form-control" placeholder="" value="100" />
+								</div>
+							</li>
+							<li class="piece-item">
+								<span class="tit col-sm-2">提现方式</span>
+								<div class="base-input col-sm-10">
+									<input type="radio" name="pay" value="1" />
+									<label for="1">支付宝提现</label>
+									<input type="radio" name="pay" value="2" />
+									<label for="2">微信提现</label><br />
+									<button class="layui-btn">提现</button>
+								</div>
+							</li>
+						</ul> -->
+
+						<div style="width: 400px;">
+							<el-form label-position="top" label-width="80px">
+								<el-form-item label="余额">
+									<el-input v-model.number="money" disabled></el-input>
+								</el-form-item>
+								<el-form-item label="提现金额">
+									 <el-input-number v-model="cashWithdrawalAmount" :disabled="cashWith" :min="1" :max="money" @change="handleChange" label="描述文字"></el-input-number>
+								</el-form-item>
+							</el-form>
+							
+							<template>
+							  <el-radio-group v-model="withdrawalMethod">
+							    <el-radio :label="1">支付宝提现</el-radio>
+							    <el-radio :label="2">微信提现</el-radio>
+							  </el-radio-group>
+							</template>
+							
+							<el-row style="margin-top: 20px;">
+								<button class="layui-btn" @click="getMoney()">提现</button>
+								
+								<el-dialog title="请输入密码" :visible.sync="dialogVisible" top="200px" width="30%"
+									:before-close="handleClose">
+								
+									<el-form ref="form" :model="form" label-width="70px">
+										<el-form-item label="密码">
+											<el-input style="margin-left: 0px;" v-model.trim="form.password" show-password></el-input>
+										</el-form-item>
+											
+										<el-form-item label="确认密码">
+											<el-input style="margin-left: 0px;" v-model.trim="form.confirmPassword" show-password></el-input>
+										</el-form-item>
+									</el-form>
+									
+									<span slot="footer" class="dialog-footer">
+										<el-button @click="dialogVisible = false">取 消</el-button>
+										<el-button type="primary" @click="verify()">确
+											定</el-button>
+									</span>
+								</el-dialog>
+							</el-row>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			var vm = new Vue({
+				el: "#app",
+				data: {
+					money: 0,					// 余额
+					cashWithdrawalAmount: '',	// 提现金额
+					withdrawalMethod: 1,		// 提现方式（默认支付宝提现）
+					form: {
+						password: '',
+						confirmPassword: ''
+					},
+					dialogVisible: false,
+					cashWith: false
+				},
+				methods: {
+					handleClose(done) {
+						this.$confirm('确认关闭？')
+							.then(_ => {
+								done();
+							})
+							.catch(_ => {});
+					},
+					handleChange(value) {
+						let tempValue = value + '';
+						// 找到小数点的位置
+						let index = tempValue.lastIndexOf(".");
+						
+						// 有小数点
+						if (index != -1) {
+							// 从小数点开始截取
+							let tempNum = tempValue.slice(index + 1);
+							
+							// 如果小数位数大于2
+							if (tempNum.length > 2) {
+								// 保留两位小数
+								this.cashWithdrawalAmount = value.toFixed(2);
+							}
+						}
+					},
+					// 提现
+					getMoney() {
+						if (this.money == 0) {
+							layer.msg("您无可提现的金额", {
+								time: 1200
+							});
+							return;
+						}
+						
+						this.dialogVisible = true;
+					},
+					verify() {
+						let password = this.form.password.trim();
+						let confirmPassword = this.form.confirmPassword.trim();
+						
+						if (password == null || password == '' || confirmPassword == null || confirmPassword == '') {
+							layer.msg("请填写密码和确认密码", {
+								time: 1200
+							});
+							return;
+						} else if (password !== confirmPassword) {
+							layer.msg("两次输入的密码不一致", {
+								time: 1200
+							});
+							return;
+						}
+						
+						// 准备要传递的数据
+						let myParams = new URLSearchParams();
+						myParams.append('password', password);
+						myParams.append("money", this.cashWithdrawalAmount);
+						
+						// 发送数据
+						axios
+						.put("http://127.0.0.1:8080/worker/withdrawCash",
+							myParams,
+							{
+								headers: {
+									'token': data
+								},
+						}).then(function(response) {
+							
+							if (response.data.code == 0) {	// 充值失败
+								layer.msg(response.data.msg);
+								return;
+							} else if (response.data.code == 1) { // 充值成功
+								vm.userInfo = response.data.data;	// 更新数据
+								// 清空输入数据
+								vm.cashWithdrawalAmount = 0;
+								vm.form.password = '';
+								vm.form.confirmPassword = '';
+								
+								layer.msg("提现成功");
+							}
+							
+							vm.getUserMoney();
+							vm.dialogVisible = false;	// 关闭弹窗
+						}).catch(function(error) {
+							console.log(error); // 提示用户失败信息
+						});
+					},
+					// 获取用户余额
+					getUserMoney() {
+						axios
+						.get("http://127.0.0.1:8080/worker/getUserMoney", {
+							headers: {
+								'token': data
+							},
+						}).then(function(response) {
+
+							if (response.data.code == 0) { // 获取失败
+								if (response.data.msg == 'NOT_LOGIN') { // 登录信息过期
+									layer.msg("登录信息过期，请重新登录", {
+										time: 1200
+									}, function(res) {
+										location.href = '../common/login.html'; // 跳转到登录页面
+									});
+
+									return;
+								}
+
+								layer.msg(response.data.msg);
+								return;
+							}
+
+							vm.money = response.data.data;
+							vm.money = vm.money.toFixed(2);	// 保留两位小数
+							vm.money = parseFloat(vm.money);
+							
+							if (vm.money == 0) {
+								vm.cashWith = true;
+							}
+						}).catch(function(error) {
+							console.log(error); // 提示用户失败信息
+						});
+					}
+				},
+				mounted() {
+					// 获取用户余额
+					this.getUserMoney();
+				}
+			})
+		</script>
+	</body>
 </html>
