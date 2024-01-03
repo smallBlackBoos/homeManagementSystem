@@ -1,6 +1,7 @@
 package com.example.homemanagementsystem.service;
 
 import com.example.homemanagementsystem.pojo.Goods;
+import com.example.homemanagementsystem.pojo.Order;
 import com.example.homemanagementsystem.pojo.PageBean;
 
 import java.util.List;
@@ -12,6 +13,13 @@ public interface GoodsService {
      * @return 服务列表
      */
     List<Goods> listByKind(Integer id);
+
+    /**
+     * 条件查询商品信息
+     * @param goods 商品对象
+     * @return PageBean
+     */
+    PageBean getGoodsInfoByConditionQuery(Integer page, Integer pageSize, Goods goods);
 
     /**
      * 分页查询所有商品信息

@@ -9,29 +9,86 @@
         select
             g.id,
             k.name,
-            g.good_name,
+            k.id as kinds_id,
+            k.name as kinds_name,
+            g.goods_name,
             g.price,
             g.image
         from goods g
             left join kinds k on k.id = g.kinds_id
     </select>
 
-    <!-- 更新商品信息 -->
-    <update id="updateGoods">
-        update goods set kinds_id =  where ;
-
-        update goods
-        <set>
-            <if test="kindsId != null">
-                kinds_id = #{kindsId}
+    <!-- 条件查询商品信息 -->
+    <select id="getGoodsInfoByConditionQuery" resultType="com.example.homemanagementsystem.pojo.Goods">
+        select
+            g.id,
+            k.name,
+            k.id as kinds_id,
+            k.name as kinds_name,
+            g.goods_name,
+            g.price,
+            g.image
+        from goods g
+            left join kinds k on k.id = g.kinds_id
+        <where>
+            <if test="id != null and id != ''">
+                g.id = #{id}
             </if>
 
             <if test="goodsName != null and goodsName != ''">
-                goods_name = #{goodsName}
+                g.goods_name like concat('%', #{goodsName}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 添加商品 -->
+    <insert id="insertGoods">
+        insert into goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="kindsId != null and kindsId != ''">
+                kinds_id,
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                goods_name,
+            </if>
+            <if test="price != null and price != ''">
+                price,
+            </if>
+            <if test="image != null and image != ''">
+                image,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="kindsId != null and kindsId != ''">
+                #{kindsId},
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                #{goodsName},
+            </if>
+            <if test="price != null and price != ''">
+                #{price},
+            </if>
+            <if test="image != null and image != ''">
+                #{image},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 更新商品信息 -->
+    <update id="updateGoods">
+        update goods
+        <set>
+            <if test="kindsId != null">
+                kinds_id = #{kindsId},
+            </if>
+
+            <if test="goodsName != null and goodsName != ''">
+                goods_name = #{goodsName},
             </if>
 
             <if test="price != null">
-                price = #{price}
+                price = #{price},
             </if>
         </set>
         where id = #{id}

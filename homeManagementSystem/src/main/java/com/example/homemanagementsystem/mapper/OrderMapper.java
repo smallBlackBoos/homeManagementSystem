@@ -22,11 +22,11 @@ public interface OrderMapper {
     List<Order> selectAll();
 
     /**
-     * 通过订单id删除订单
-     * @param id 订单id
+     * 条件查询订单信息
+     * @param order 订单对象
+     * @return List<Order>
      */
-    @Delete("delete from `order` where id = #{id}")
-    void deleteOrderById(Integer id);
+    List<Order> getOrdersInfoByConditionQuery(Order order);
 
     /**
      * 通过id修改订单状态
@@ -49,6 +49,22 @@ public interface OrderMapper {
      * @param orderId 订单id
      * @param workerId 家政人员id
      */
-    @Update("update `order` set worker_id = #{workerId} where id = #{orderId}")
-    void updateWorkerId(Integer orderId, Integer workerId);
+//    @Update("update `order` set worker_id = #{workerId} where id = #{orderId}")
+//    void updateWorkerId(Integer orderId, Integer workerId);
+
+    /**
+     * 更新家政人员id和状态
+     * @param workerId 家政人员id
+     * @param orderId 订单id
+     * @param status 订单状态
+     */
+    @Update("update `order` set worker_id = #{workerId}, status = #{status} where id = #{orderId}" )
+    void updateWorkerIdAndState(Integer workerId, Integer orderId,int status);
+
+    /**
+     * 通过订单id删除订单
+     * @param id 订单id
+     */
+    @Delete("delete from `order` where id = #{id}")
+    void deleteOrderById(Integer id);
 }

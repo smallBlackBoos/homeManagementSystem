@@ -17,7 +17,7 @@ public interface ConsumerUserMapper {
      * @return 用户对象
      */
     @Select("select id, username from consumer_user where username = #{username} and password = #{password}")
-    public ConsumerUser getConsumerUserNameAndPassWord(ConsumerUser consumerUser);
+    ConsumerUser getConsumerUserNameAndPassWord(ConsumerUser consumerUser);
 
     /**
      * 通过id查询用户信息
@@ -30,10 +30,17 @@ public interface ConsumerUserMapper {
 
     /**
      * 查询所有用户信息
-     * @return
+     * @return List<ConsumerUser>
      */
     @Select("select id, username, name, password, sex, address, phone, email, image, money from consumer_user")
     List<ConsumerUser> getAllUser();
+
+    /**
+     * 条件查询获取消费者用户信息
+     * @param consumerUser 消费者对象
+     * @return List<ConsumerUser>
+     */
+    List<ConsumerUser> getConsumerInfoByConditionQuery(ConsumerUser consumerUser);
 
     /**
      * 通过用户名查找用户信息
@@ -65,11 +72,10 @@ public interface ConsumerUserMapper {
 
     /**
      * 修改图片路径
-     *
-     * @param id
+     * @param id 用户id
      * @param url 图片路径
      */
-    @Update("update consumer_user set image = #{url} where id = #{id};")
+    @Update("update consumer_user set image = #{url} where id = #{id}")
     void updateImage(Integer id, String url);
 
     /**
@@ -79,6 +85,4 @@ public interface ConsumerUserMapper {
      */
     @Update("update consumer_user set money = money + #{money} where id = #{id}")
     void updateMoney(Integer id, Double money);
-
-
 }

@@ -3,6 +3,7 @@ package com.example.homemanagementsystem.service.impl;
 import com.example.homemanagementsystem.mapper.GoodsMapper;
 import com.example.homemanagementsystem.pojo.ConsumerUser;
 import com.example.homemanagementsystem.pojo.Goods;
+import com.example.homemanagementsystem.pojo.Kinds;
 import com.example.homemanagementsystem.pojo.PageBean;
 import com.example.homemanagementsystem.service.GoodsService;
 import com.github.pagehelper.Page;
@@ -32,6 +33,16 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<Goods> listByKind(Integer id) {
         return goodsMapper.getByKindsId(id);
+    }
+
+    @Override
+    public PageBean getGoodsInfoByConditionQuery(Integer page, Integer pageSize, Goods goods) {
+        PageHelper.startPage(page, pageSize);
+
+        List<Goods> goodsList = goodsMapper.getGoodsInfoByConditionQuery(goods);
+        Page<Goods> p = (Page<Goods>) goodsList;
+        PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
+        return pageBean;
     }
 
     @Override

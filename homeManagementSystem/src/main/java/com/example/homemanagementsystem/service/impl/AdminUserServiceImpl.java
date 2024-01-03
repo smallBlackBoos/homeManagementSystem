@@ -39,13 +39,18 @@ public class AdminUserServiceImpl implements AdminUserService {
     }
 
     @Override
-    public AdminUser getAdminInfo(Integer id) {
-        return adminUserMapper.getAdminInfo(id);
+    public AdminUser getThisAdminInfo(Integer id) {
+        return adminUserMapper.getAdminById(id);
     }
 
     @Override
-    public void editAdminUserInfo(AdminUser adminUser) {
-        adminUserMapper.updateAdmin(adminUser);
+    public PageBean getAdminInfoByConditionQuery(Integer page, Integer pageSize, AdminUser adminUser) {
+        PageHelper.startPage(page, pageSize);
+
+        List<AdminUser> adminUsers = adminUserMapper.getAdminInfoByConditionQuery(adminUser);
+        Page<AdminUser> p = (Page<AdminUser>) adminUsers;
+        PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
+        return pageBean;
     }
 
     @Override
@@ -61,6 +66,32 @@ public class AdminUserServiceImpl implements AdminUserService {
     @Override
     public Goods getGoodsInfo(Integer id) {
         return goodsMapper.getById(id);
+    }
+
+    @Override
+    public Result addAdminUser(AdminUser adminUser) {
+        // 通过用户名查询查询
+        AdminUser au = adminUserMapper.selectUserByUsername(adminUser.getUsername());
+
+        if (au != null) {
+            return Result.error("用户名已存在");
+        }
+
+        adminUserMapper.insertAdminUser(adminUser);
+        return Result.success("添加成功");
+    }
+
+    @Override
+    public Result editAdminUserInfo(AdminUser adminUser) {
+        // 通过用户名查询查询
+        AdminUser au = adminUserMapper.selectUserByUsername(adminUser.getUsername());
+
+        if (au != null) {
+            return Result.error("用户名已存在");
+        }
+
+        adminUserMapper.updateAdmin(adminUser);
+        return Result.success("修改成功");
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.example.homemanagementsystem.service;
 import com.example.homemanagementsystem.pojo.AdminUser;
 import com.example.homemanagementsystem.pojo.Goods;
 import com.example.homemanagementsystem.pojo.PageBean;
+import com.example.homemanagementsystem.pojo.Result;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,6 +17,13 @@ public interface AdminUserService {
     AdminUser login(AdminUser adminUser);
 
     /**
+     * 获取当前管理员个人信息
+     * @param id 管理员id
+     * @return AdminUser
+     */
+    AdminUser getThisAdminInfo(Integer id);
+
+    /**
      * 分页查询所有管理员信息
      * @param page 页数
      * @param pageSize 每页展示的数据条数
@@ -24,11 +32,11 @@ public interface AdminUserService {
     PageBean getAllAdminUser(Integer page, Integer pageSize);
 
     /**
-     * 获取当前管理员的个人信息
-     * @param id 管理员id
-     * @return Result
+     * 条件查询获取管理员信息
+     * @param adminUser 管理员对象
+     * @return PageBean
      */
-    AdminUser getAdminInfo(Integer id);
+    PageBean getAdminInfoByConditionQuery(Integer page, Integer pageSize, AdminUser adminUser);
 
     /**
      * 获取商品信息
@@ -38,11 +46,18 @@ public interface AdminUserService {
     Goods getGoodsInfo(Integer id);
 
     /**
+     * 添加管理员
+     * @param adminUser 管理员对象
+     * @return Result
+     */
+    Result addAdminUser(AdminUser adminUser);
+
+    /**
      * 修改个人信息
      * @param adminUser 管理员对象
      * @return Result
      */
-    void editAdminUserInfo(AdminUser adminUser);
+    Result editAdminUserInfo(AdminUser adminUser);
 
     /**
      * 上传图片

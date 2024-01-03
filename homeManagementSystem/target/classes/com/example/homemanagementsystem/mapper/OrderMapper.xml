@@ -9,7 +9,7 @@
         <result column="worker_id" property="workerId"/>
         <result column="username" property="username" />
         <result column="worker_name" property="workerName" />
-        <result column="good_name" property="goodsName" />
+        <result column="goods_name" property="goodsName" />
         <result column="kinds_name" property="kindsName" />
         <result column="price" property="goodsPrice" />
         <result column="status" property="status" />
@@ -23,7 +23,7 @@
             c.username,
             w.name as worker_name,
             w.id as worker_id,
-            g.good_name,
+            g.goods_name,
             g.price,
             o.status,
             o.create_time,
@@ -39,18 +39,57 @@
     </select>
 
     <!-- 查询所有用户的订单信息 -->
-    <select id="selectAll" resultType="com.example.homemanagementsystem.pojo.Order">
+    <select id="selectAll" resultMap="orderMap">
         select
             o.id,
             c.username,
             w.name as worker_name,
-            g.good_name,
+            g.goods_name,
+            k.name as kinds_name,
             g.price,
-            o.status
+            o.status,
+            o.create_time
         from `order` o
             left join consumer_user c on c.id = o.user_id
             left join worker w on w.id = o.worker_id
             left join goods g on g.id = o.goods_id
+            left join kinds k on k.id = g.kinds_id
+        order by create_time desc
+    </select>
+
+    <!-- 条件查询订单信息 -->
+    <select id="getOrdersInfoByConditionQuery"  resultMap="orderMap">
+        select
+            o.id,
+            c.username,
+            w.name as worker_name,
+            g.goods_name,
+            k.name as kinds_name,
+            g.price,
+            o.status,
+            o.create_time
+        from `order` o
+             left join consumer_user c on c.id = o.user_id
+             left join worker w on w.id = o.worker_id
+             left join goods g on g.id = o.goods_id
+             left join kinds k on k.id = g.kinds_id
+        <where>
+            <if test="id != null and id != ''">
+                o.id = #{id}
+            </if>
+
+            <if test="username != null and username != ''">
+                c.username like concat('%', #{username}, '%')
+            </if>
+
+            <if test="status != null and status != ''">
+                o.status = #{status}
+            </if>
+
+            <if test="workerId != null and workerId != ''">
+                o.worker_id = #{workerId}
+            </if>
+        </where>
         order by create_time desc
     </select>
 </mapper>

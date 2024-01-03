@@ -4,6 +4,141 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.homemanagementsystem.mapper.WorkerMapper">
 
+    <!-- 条件查询家政人员信息 -->
+    <select id="getConsumerInfoByConditionQuery" resultType="com.example.homemanagementsystem.pojo.Worker">
+        select
+            id, username, name, sex, age, address, phone, email, brief_introduction, status, image, money
+        from worker
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+            <if test="username != null and username != ''">
+                username like concat('%', #{username}, '%')
+            </if>
+            <if test="name != null and name != ''">
+                name like concat('%', #{name}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 插入家政人员信息 -->
+    <insert id="insertUser">
+        insert into worker
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="username != null and username != ''">
+                    username,
+                </if>
+                <if test="name != null and name != ''">
+                    name,
+                </if>
+                <if test="password != null and password != ''">
+                    password,
+                </if>
+                <if test="sex != null and sex != ''">
+                    sex,
+                </if>
+                <if test="age != null and age != ''">
+                    age,
+                </if>
+                <if test="address != null and address != ''">
+                    address,
+                </if>
+                <if test="phone != null and phone != ''">
+                    phone,
+                </if>
+                <if test="email != null and email != ''">
+                    email,
+                </if>
+                <if test="briefIntroduction != null and briefIntroduction != ''">
+                    brief_introduction,
+                </if>
+                <if test="status != null and status != ''">
+                    status,
+                </if>
+                <if test="image != null and image != ''">
+                    image,
+                </if>
+                <if test="money != null and money != ''">
+                    money,
+                </if>
+            </trim>
+        values
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="username != null and username != ''">
+                    #{username},
+                </if>
+                <if test="name != null and name != ''">
+                    #{name},
+                </if>
+                <if test="password != null and password != ''">
+                    #{password},
+                </if>
+                <if test="sex != null and sex != ''">
+                    #{sex},
+                </if>
+                <if test="age != null and age != ''">
+                    #{age},
+                </if>
+                <if test="address != null and address != ''">
+                    #{address},
+                </if>
+                <if test="phone != null and phone != ''">
+                    #{phone},
+                </if>
+                <if test="email != null and email != ''">
+                    #{email},
+                </if>
+                <if test="briefIntroduction != null and briefIntroduction != ''">
+                    #{briefIntroduction},
+                </if>
+                <if test="status != null and status != ''">
+                    #{status},
+                </if>
+                <if test="image != null and image != ''">
+                    #{image},
+                </if>
+                <if test="money != null and money != ''">
+                    #{money},
+                </if>
+            </trim>
+    </insert>
+
+    <!-- 修改当前家政人员个人信息 -->
+    <update id="updateWorkerInfo">
+        update worker
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="sex != null and sex != ''">
+                sex = #{sex},
+            </if>
+            <if test="age != null and age != ''">
+                age = #{age},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="briefIntroduction != null and briefIntroduction != ''">
+                brief_introduction = #{briefIntroduction},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
     <!-- 批量删除员工 -->
     <delete id="deleteById">
         delete

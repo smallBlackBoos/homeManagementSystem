@@ -18,6 +18,13 @@ public interface KindsMapper {
     List<Kinds> selectAll();
 
     /**
+     * 条件查询商品种类信息
+     * @param kinds 商品种类对象
+     * @return List<Kinds>
+     */
+    List<Kinds> getKindsInfoByConditionQuery(Kinds kinds);
+
+    /**
      * 添加商品种类
      * @param kinds 商品种类对象
      */

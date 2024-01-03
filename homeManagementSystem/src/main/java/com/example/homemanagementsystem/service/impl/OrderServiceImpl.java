@@ -1,6 +1,7 @@
 package com.example.homemanagementsystem.service.impl;
 
 import com.example.homemanagementsystem.mapper.OrderMapper;
+import com.example.homemanagementsystem.pojo.AdminUser;
 import com.example.homemanagementsystem.pojo.Kinds;
 import com.example.homemanagementsystem.pojo.Order;
 import com.example.homemanagementsystem.pojo.PageBean;
@@ -19,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderMapper orderMapper;
 
     @Override
-    public PageBean getAllOrder(Integer page, Integer pageSize) {
+    public PageBean getAllOrders(Integer page, Integer pageSize) {
         PageHelper.startPage(page, pageSize);
 
         List<Order> orders = orderMapper.selectAll();
@@ -28,6 +29,26 @@ public class OrderServiceImpl implements OrderService {
         PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
 
         return pageBean;
+    }
+
+    @Override
+    public PageBean getOrdersInfoByConditionQuery(Integer page, Integer pageSize, Order order) {
+        PageHelper.startPage(page, pageSize);
+
+        List<Order> orders = orderMapper.getOrdersInfoByConditionQuery(order);
+        Page<Order> p = (Page<Order>) orders;
+        PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
+        return pageBean;
+    }
+
+    @Override
+    public void changeOrderIdAndState(Integer workerId, Integer orderId) {
+        orderMapper.updateWorkerIdAndState(workerId, orderId, 2);
+    }
+
+    @Override
+    public void changeState(Integer orderId) {
+        orderMapper.updateStatus(orderId, 3);
     }
 
     @Override

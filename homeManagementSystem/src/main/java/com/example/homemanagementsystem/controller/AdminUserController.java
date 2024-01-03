@@ -24,6 +24,9 @@ public class AdminUserController {
     private AdminUserService adminUserService;
 
     @Autowired
+    private ConsumerUserService consumerUserService;
+
+    @Autowired
     private GoodsService goodsService;
 
     @Autowired
@@ -39,18 +42,114 @@ public class AdminUserController {
     private QiniuKodoUtils qiniuKodoUtils;
 
     /**
-     * 获取当前管理员的个人信息
+     * 获取当前管理员个人信息
      * @param token 令牌
      * @return Result
      */
-    @RequestMapping("/getAdminInfo")
-    public Result getAdminInfo(@RequestHeader String token) {
-        // 解析token，获取管理员id
-        Claims claims = JwtUtils.parseJWT(token);
-        Integer id = (Integer) claims.get("id");
+    @GetMapping("/getThisAdminInfo")
+    public Result getThisAdminInfo(@RequestHeader String token) {
+        // 解析 token。
+        Claims claims = JwtUtils.parseJWT(token);  // jwt 包含当前包含的员工信息
+        Integer id = (Integer) claims.get("id");    // 得到用户id值
 
-        AdminUser adminUser = adminUserService.getAdminInfo(id);
+        AdminUser adminUser = adminUserService.getThisAdminInfo(id);
         return Result.success(adminUser);
+    }
+
+    /**
+     * 条件查询获取管理员信息
+     * @param page 页码
+     * @param pageSize 每页大小
+     * @param adminUser 管理员对象
+     * @return Result
+     */
+    @PostMapping("/getAdminInfoByConditionQuery")
+    public Result getAdminInfoByConditionQuery(@RequestParam(defaultValue = "1") Integer page,
+                               @RequestParam(defaultValue = "10") Integer pageSize,
+                               @RequestBody AdminUser adminUser) {
+        PageBean pageBean = adminUserService.getAdminInfoByConditionQuery(page, pageSize, adminUser);
+
+        return Result.success(pageBean);
+    }
+
+    /**
+     * 条件查询获取消费者用户信息
+     * @param page 页码
+     * @param pageSize 每页大小
+     * @param consumerUser 消费者对象
+     * @return Result
+     */
+    @PostMapping("/getConsumerInfoByConditionQuery")
+    public Result getConsumerInfoByConditionQuery(@RequestParam(defaultValue = "1") Integer page,
+                                               @RequestParam(defaultValue = "10") Integer pageSize,
+                                               @RequestBody ConsumerUser consumerUser) {
+        PageBean pageBean = consumerUserService.getConsumerInfoByConditionQuery(page, pageSize, consumerUser);
+
+        return Result.success(pageBean);
+    }
+
+    /**
+     * 条件查询获取家政人员信息
+     * @param page 页码
+     * @param pageSize 每页大小
+     * @param worker 家政人员对象
+     * @return Result
+     */
+    @PostMapping("/getWorkerInfoByConditionQuery")
+    public Result getWorkerInfoByConditionQuery(@RequestParam(defaultValue = "1") Integer page,
+                                                  @RequestParam(defaultValue = "10") Integer pageSize,
+                                                  @RequestBody Worker worker) {
+        PageBean pageBean = workerService.getWorkerInfoByConditionQuery(page, pageSize, worker);
+
+        return Result.success(pageBean);
+    }
+
+    /**
+     * 条件查询商品种类信息
+     * @param page 页码
+     * @param pageSize 每页大小
+     * @param kinds 商品种类对象
+     * @return Result
+     */
+    @PostMapping("/getKindsInfoByConditionQuery")
+    public Result getKindsInfoByConditionQuery(@RequestParam(defaultValue = "1") Integer page,
+                                                @RequestParam(defaultValue = "10") Integer pageSize,
+                                                @RequestBody Kinds kinds) {
+        PageBean pageBean = kindsService.getKindsInfoByConditionQuery(page, pageSize, kinds);
+
+        return Result.success(pageBean);
+    }
+
+    /**
+     * 条件查询商品信息
+     * @param page 页码
+     * @param pageSize 每页大小
+     * @param goods 商品对象
+     * @return Result
+     */
+    @PostMapping("/getGoodsInfoByConditionQuery")
+    public Result getGoodsInfoByConditionQuery(@RequestParam(defaultValue = "1") Integer page,
+                                               @RequestParam(defaultValue = "10") Integer pageSize,
+                                               @RequestBody Goods goods) {
+        PageBean pageBean = goodsService.getGoodsInfoByConditionQuery(page, pageSize, goods);
+
+        return Result.success(pageBean);
+    }
+
+    /**
+     * 条件查询订单信息
+     * @param page 页码
+     * @param pageSize 每页大小
+     * @param order 订单对象
+     * @return Result
+     */
+    @PostMapping("/getOrdersInfoByConditionQuery")
+    public Result getOrdersInfoByConditionQuery(@RequestParam(defaultValue = "1") Integer page,
+                                               @RequestParam(defaultValue = "10") Integer pageSize,
+                                               @RequestBody Order order) {
+        PageBean pageBean = orderService.getOrdersInfoByConditionQuery(page, pageSize, order);
+
+        return Result.success(pageBean);
     }
 
     /**
@@ -68,15 +167,29 @@ public class AdminUserController {
     }
 
     /**
+     * 分页查询所有消费者用户信息
+     * @param page 页数
+     * @param pageSize 每页展示的数据条数
+     * @return Result
+     */
+    @GetMapping("/getAllConsumerUser")
+    public Result getAllConsumerUser(@RequestParam(defaultValue = "1") Integer page,
+                                  @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageBean pageBean = consumerUserService.getAllConsumerUser(page, pageSize);
+
+        return Result.success(pageBean);
+    }
+
+    /**
      * 分页查询所有商品种类信息
      * @param page 页数
      * @param pageSize 分页大小
      * @return Result
      */
-    @GetMapping("/getAllKinds")
-    public Result getAllKinds(@RequestParam(defaultValue = "1") Integer page,
+    @GetMapping("/getAllKindsPage")
+    public Result getAllKindsPage(@RequestParam(defaultValue = "1") Integer page,
                               @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageBean pageBean = kindsService.getAllKinds(page, pageSize);
+        PageBean pageBean = kindsService.getAllKindsPage(page, pageSize);
 
         return Result.success(pageBean);
     }
@@ -115,12 +228,43 @@ public class AdminUserController {
      * @param pageSize 每页展示的数据条数
      * @return Result
      */
-    @GetMapping("/getAllOrder")
-    public Result getAllOrder(@RequestParam(defaultValue = "1") Integer page,
+    @GetMapping("/getAllOrders")
+    public Result getAllOrders(@RequestParam(defaultValue = "1") Integer page,
                               @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageBean pageBean = orderService.getAllOrder(page, pageSize);
+        PageBean pageBean = orderService.getAllOrders(page, pageSize);
 
         return Result.success(pageBean);
+    }
+
+    /**
+     * 查询所有商品种类信息
+     * @return Result
+     */
+    @GetMapping("/getAllKinds")
+    public Result getAllKinds() {
+        List<Kinds> kindsList = kindsService.getAllKinds();
+
+        return Result.success(kindsList);
+    }
+
+    /**
+     * 添加管理员
+     * @param adminUser 管理员对象
+     * @return Result
+     */
+    @PostMapping("/addAdminUser")
+    public Result addAdminUser(@RequestBody AdminUser adminUser) {
+        return adminUserService.addAdminUser(adminUser);
+    }
+
+    /**
+     * 添加家政人员
+     * @param worker 家政人员对象
+     * @return Result
+     */
+    @PostMapping("/addWorkerUser")
+    public Result addWorkerUser(@RequestBody Worker worker) {
+        return workerService.addWorkerUser(worker);
     }
 
     /**
@@ -131,7 +275,7 @@ public class AdminUserController {
     @PostMapping("/addGoods")
     public Result addGoods(@RequestBody Goods goods) {
         goodsService.addGoods(goods);
-        return Result.success();
+        return Result.success("添加成功");
     }
 
     /**
@@ -142,24 +286,28 @@ public class AdminUserController {
     @PostMapping("/addKinds")
     public Result addKinds(@RequestBody Kinds kinds) {
         kindsService.addKinds(kinds);
-        return Result.success();
+        return Result.success("添加成功");
     }
 
     /**
-     * 修改管理员个人信息
-     * @param token 令牌
+     * 修改管理员信息
      * @param adminUser 管理员对象
      * @return Result
      */
     @PutMapping("/editAdminUserInfo")
-    public Result editAdminUserInfo(@RequestHeader String token, @RequestBody AdminUser adminUser) {
-        // 解析token，获取用户id
-        Claims claims = JwtUtils.parseJWT(token);
-        Integer id = (Integer) claims.get("id");
-        adminUser.setId(id);
+    public Result editAdminUserInfo(@RequestBody AdminUser adminUser) {
+        return adminUserService.editAdminUserInfo(adminUser);
+    }
 
-        adminUserService.editAdminUserInfo(adminUser);
-        return Result.success();
+    /**
+     * 修改家政人员的工作状态
+     * @param worker 家政人员对象
+     * @return Result
+     */
+    @PutMapping("/editWorkerStatus")
+    public Result editWorkerStatus(@RequestBody Worker worker) {
+        workerService.editWorkerStatus(worker);
+        return Result.success("修改成功");
     }
 
     /**
@@ -181,7 +329,20 @@ public class AdminUserController {
     @PutMapping("/editKindsInfo")
     public Result editKindsInfo(@RequestBody Kinds kinds) {
         kindsService.editKindsInfo(kinds);
-        return Result.success();
+        return Result.success("修改成功");
+    }
+
+    /**
+     * 上传添加的商品图片
+     * @param image 图片
+     * @return 结果
+     */
+    @Transactional
+    @PostMapping("/addUpload")
+    public Result addUpload(MultipartFile image) throws IOException {
+        // 上传文件
+        String url = qiniuKodoUtils.upload(image);
+        return Result.success(url);
     }
 
     /**
@@ -201,8 +362,7 @@ public class AdminUserController {
 
         // 解析 token。
         try {
-            Map<String, Object> claims = new HashMap<>();
-            claims = JwtUtils.parseJWT(jwt);  // jwt 包含当前包含的员工信息
+            JwtUtils.parseJWT(jwt);  // jwt 包含当前包含的员工信息
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -222,20 +382,8 @@ public class AdminUserController {
             qiniuKodoUtils.delete(oldUrl);
         }
 
-        return Result.success();
+        return Result.success(url);
     }
-
-    /**
-     * 通过用户名去删
-     * @return Result
-     */
-    /*
-    @DeleteMapping("/removeAdminUser")
-    public Result removeWorker(String username) {
-        adminUserService.deleteAdminUser(username);
-        return Result.success();
-    }
-     */
 
     /**
      * 删除家政人员
@@ -246,7 +394,7 @@ public class AdminUserController {
     public Result removeWorker(@PathVariable List<Integer> ids) {
         workerService.removeWorker(ids);
 
-        return Result.success();
+        return Result.success("删除成功");
     }
 
     /**
@@ -258,7 +406,7 @@ public class AdminUserController {
     public Result removeGoods(@PathVariable List<Integer> ids) {
         goodsService.removeGoods(ids);
 
-        return Result.success();
+        return Result.success("删除成功");
     }
 
     /**
@@ -270,7 +418,7 @@ public class AdminUserController {
     public Result removeKinds(@PathVariable List<Integer> ids) {
         kindsService.removeKinds(ids);
 
-        return Result.success();
+        return Result.success("删除成功");
     }
 
     /**
@@ -281,7 +429,20 @@ public class AdminUserController {
     @DeleteMapping("/deleteAllAdminUser/{ids}")
     public Result deleteAllAdminUser(@PathVariable List<Integer> ids) {
         adminUserService.deleteAllAdminUser(ids);
-        return Result.success();
+        return Result.success("删除成功");
+    }
+
+    /**
+     * 删除商品图片
+     * @param url 图片路径
+     * @return Result
+     */
+    @DeleteMapping("/deleteImage")
+    public Result deleteAllAdminUser(String url) {
+        // 删除图片
+        qiniuKodoUtils.delete(url);
+
+        return Result.success("删除成功");
     }
 
     /**

@@ -17,7 +17,7 @@ public interface GoodsMapper {
      * @param id 分类id
      * @return 服务列表
      */
-    @Select("select id, kinds_id, good_name, price from goods where kinds_id = #{id}")
+    @Select("select id, kinds_id, goods_name, price from goods where kinds_id = #{id}")
     List<Goods> getByKindsId(Integer id);
 
     /**
@@ -25,12 +25,19 @@ public interface GoodsMapper {
      * @param id 商品id
      * @return 商品对象
      */
-    @Select("select id, kinds_id, good_name, price, image from goods where id = #{id}")
+    @Select("select id, kinds_id, goods_name, price, image from goods where id = #{id}")
     Goods getById(Integer id);
 
     /**
+     * 条件查询所有商品信息
+     * @param goods 商品对象
+     * @return Result
+     */
+    List<Goods> getGoodsInfoByConditionQuery(Goods goods);
+
+    /**
      * 查询所有商品信息
-     * @return
+     * @return List<Goods>
      */
     List<Goods> getAllGoods();
 
@@ -52,7 +59,6 @@ public interface GoodsMapper {
      * 添加商品
      * @param goods 商品对象
      */
-    @Insert("insert into goods(kinds_id, good_name, price) values (#{kindsId}, #{goodsName}, #{price}) ")
     void insertGoods(Goods goods);
 
     /**

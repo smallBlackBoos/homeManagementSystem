@@ -50,6 +50,18 @@ public class ConsumerUserServiceImpl implements ConsumerUserService {
     }
 
     @Override
+    public PageBean getConsumerInfoByConditionQuery(Integer page, Integer pageSize, ConsumerUser consumerUser) {
+        PageHelper.startPage(page, pageSize);
+
+        List<ConsumerUser> consumerUsers = consumerUserMapper.getConsumerInfoByConditionQuery(consumerUser);
+        Page<ConsumerUser> p = (Page<ConsumerUser>) consumerUsers;
+
+        PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
+
+        return pageBean;
+    }
+
+    @Override
     public PageBean getConsumerUserOrder(Integer userId, int page, Integer pageSize) {
         PageHelper.startPage(page, pageSize);
 
@@ -164,8 +176,6 @@ public class ConsumerUserServiceImpl implements ConsumerUserService {
 
         // 更新消费者账户余额
         consumerUserMapper.updateMoney(id, -money);
-        // 更新家政人员账户余额
-        // workerMapper.updateMoney(workerId, money);
         // 更新订单状态为（1 已支付，等待服务人员上门）
         orderMapper.updateStatus(orderId, 1);
 
@@ -184,22 +194,22 @@ public class ConsumerUserServiceImpl implements ConsumerUserService {
          orderMapper.insert(order);
     }
 
-    @Transactional
-    @Override
-    public void atLeisureWorker(Integer orderId) {
-        // 获取所有空闲的家政人员的id
-        List<Integer> workerIdList = workerMapper.getWorkerByStatus();
-
-        // 从空闲的家政人员id列表中随机取得一个id值
-        int index = (int) (Math.random() * workerIdList.size());
-        Integer workerId = workerIdList.get(index);
-
-        // 更新订单的家政人员id  -->  给订单分配一个家政人员
-        orderMapper.updateWorkerId(orderId, workerId);
-
-        // 修改该家政人员的状态为1，工作中
-        workerMapper.updateStatus(workerId, 1);
-    }
+//    @Transactional
+//    @Override
+//    public void atLeisureWorker(Integer orderId) {
+//        // 获取所有空闲的家政人员的id
+//        List<Integer> workerIdList = workerMapper.getWorkerByStatus();
+//
+//        // 从空闲的家政人员id列表中随机取得一个id值
+//        int index = (int) (Math.random() * workerIdList.size());
+//        Integer workerId = workerIdList.get(index);
+//
+//        // 更新订单的家政人员id  -->  给订单分配一个家政人员
+//        orderMapper.updateWorkerId(orderId, workerId);
+//
+//        // 修改该家政人员的状态为1，工作中
+//        workerMapper.updateStatus(workerId, 1);
+//    }
 
     /*
     @Override

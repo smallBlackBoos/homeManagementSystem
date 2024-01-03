@@ -35,6 +35,16 @@ public interface ConsumerUserService {
     PageBean getAllConsumerUser(Integer page, Integer pageSize);
 
     /**
+     * 条件查询获取消费者用户信息
+     * @param page 页码
+     * @param pageSize 每页大小
+     * @param consumerUser 消费者对象
+     * @return Result
+     */
+    PageBean getConsumerInfoByConditionQuery(Integer page, Integer pageSize, ConsumerUser consumerUser);
+
+
+    /**
      * 分页查询用户订单
      * @param userId 用户id
      * @param page 页数
@@ -103,5 +113,5 @@ public interface ConsumerUserService {
      * 给订单分配空闲的家政人员
      * @param orderId 订单Id
      */
-    void atLeisureWorker(Integer orderId);
+//    void atLeisureWorker(Integer orderId);
 }

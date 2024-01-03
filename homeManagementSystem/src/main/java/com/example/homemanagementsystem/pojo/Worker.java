@@ -22,5 +22,6 @@ public class Worker {
     private String email;   // 邮箱
     private String briefIntroduction;   // 简介
     private Short status;   // 工作状态，0 空闲，1 工作
+    private Double money;   // 余额
     private String image;   // 图片
 }

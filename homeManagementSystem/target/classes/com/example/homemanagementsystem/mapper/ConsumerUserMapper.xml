@@ -4,6 +4,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.homemanagementsystem.mapper.ConsumerUserMapper">
 
+    <!-- 条件查询获取消费者用户信息 -->
+    <select id="getConsumerInfoByConditionQuery" resultType="com.example.homemanagementsystem.pojo.ConsumerUser">
+        select
+            id, username, name, sex, address, phone, email, image, money
+        from
+            consumer_user
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+
+            <if test="username != null and username != ''">
+                username like concat('%', #{username}, '%')
+            </if>
+
+            <if test="name != null and name != ''">
+                name like concat('%', #{name}, '%')
+            </if>
+
+            <if test="sex != null and sex != ''">
+                sex = #{sex}
+            </if>
+        </where>
+    </select>
+
     <!-- 修改用户信息 -->
     <update id="updateUser">
         update consumer_user
